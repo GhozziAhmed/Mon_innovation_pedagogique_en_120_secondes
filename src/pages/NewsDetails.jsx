@@ -10,7 +10,7 @@ const NewsDetails = () => {
   const [article, setArticle] = useState({});
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/news/${id}`)
+      .get(`https://mon-innovation-pedagogique-en-120.onrender.com/api/news/${id}`)
       .then((res) => {
         console.log(res.data);
         setArticle(res.data);

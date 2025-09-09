@@ -12,7 +12,7 @@ const Vote = () => {
 
   const fetchData = () => {
     axios
-      .get("http://localhost:5000/api/candidatures?edition_id=1")
+      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/candidatures?edition_id=1")
       .then((res) => {
         console.log(res.data);
         setCandidatures(res.data);
@@ -25,7 +25,7 @@ const Vote = () => {
   useEffect(() => {
     fetchData();
     axios
-      .get("http://localhost:5000/api/phases/current-phase")
+      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/current-phase")
       .then((res) => {
         console.log(res.data);
         setPhase(res.data.phase.phase_name);

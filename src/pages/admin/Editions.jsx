@@ -14,7 +14,7 @@ import DeleteArchiveModal from "../../components/DeleteArchiveModal";
 const Editions = () => {
   const fetchEditions = () => {
     axios
-      .get("http://localhost:5000/api/editions")
+      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/editions")
       .then((res) => {
         console.log(res);
         setEditions(res.data);
@@ -37,7 +37,7 @@ const Editions = () => {
     console.log(form);
     if (modalMode === "add") {
       axios
-        .post("http://localhost:5000/api/editions", form, {
+        .post("https://mon-innovation-pedagogique-en-120.onrender.com/api/editions", form, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -60,7 +60,7 @@ const Editions = () => {
         });
     } else {
       axios
-        .put("http://localhost:5000/api/editions/edit", form, {
+        .put("https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/edit", form, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -87,7 +87,7 @@ const Editions = () => {
   const handleDelete = (id) => {
     setLoading(true);
     axios
-      .delete(`http://localhost:5000/api/editions/delete/${id}`, {
+      .delete(`https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/delete/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -119,7 +119,7 @@ const Editions = () => {
   const handleArchive = (id) => {
     setLoading(true);
     axios
-      .put(`http://localhost:5000/api/editions/${id}/archive`, {}, {
+      .put(`https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/${id}/archive`, {}, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

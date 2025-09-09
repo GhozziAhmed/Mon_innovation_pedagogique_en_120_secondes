@@ -10,11 +10,11 @@ const Evaluations = () => {
   const [evaluations, setEvaluations] = useState([]);
   const fetchData = async () => {
     const editionRes = await axios.get(
-      "http://localhost:5000/api/editions/active"
+      "https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/active"
     );
     const edition_id = editionRes.data.edition_id;
     axios
-      .get(`http://localhost:5000/api/jury/evaluations/${edition_id}`, {
+      .get(`https://mon-innovation-pedagogique-en-120.onrender.com/api/jury/evaluations/${edition_id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

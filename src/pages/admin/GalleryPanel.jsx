@@ -6,7 +6,7 @@ const GalleryPanel = () => {
   const [editions, setEditions] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/editions")
+      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/editions")
       .then((res) => {
         console.log(res.data);
         setEditions(res.data);

@@ -7,10 +7,10 @@ import { toast } from "react-toastify";
 const Phase = ({ phase, src, fetchData }) => {
   const [dropDown, setDropDown] = useState(false);
   const handleChange = async (status) => {
-    const res = await axios.get("http://localhost:5000/api/editions/active");
+    const res = await axios.get("https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/active");
     axios
       .put(
-        `http://localhost:5000/api/phases/${res.data.edition_id}/${phase.id}`,
+        `https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/${res.data.edition_id}/${phase.id}`,
         { status },
         {
           headers: {

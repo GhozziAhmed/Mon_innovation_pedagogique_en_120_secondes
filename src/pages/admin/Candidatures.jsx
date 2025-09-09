@@ -16,7 +16,7 @@ const Candidatures = () => {
   const [filteredCandidatures, setFilteredCandidatures] = useState([]);
   const fetchData = () => {
     axios
-      .get("http://localhost:5000/api/candidatures")
+      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/candidatures")
       .then((res) => {
         console.log(res.data);
         setCandidatures(res.data);
@@ -41,7 +41,7 @@ const Candidatures = () => {
       setPreLoading(true);
       axios
         .patch(
-          `http://localhost:5000/api/candidatures/${id}/status`,
+          `https://mon-innovation-pedagogique-en-120.onrender.com/api/candidatures/${id}/status`,
           { status: "preselectionnee" },
           {
             headers: {
@@ -74,7 +74,7 @@ const Candidatures = () => {
       setRejectLoading(true);
       axios
         .patch(
-          `http://localhost:5000/api/candidatures/${id}/status`,
+          `https://mon-innovation-pedagogique-en-120.onrender.com/api/candidatures/${id}/status`,
           { status: mode },
           {
             headers: {
@@ -109,7 +109,7 @@ const Candidatures = () => {
     setDeleteLoading(true);
     axios
       .delete(
-        `http://localhost:5000/api/candidatures/delete/${CandidatureId}`,
+        `https://mon-innovation-pedagogique-en-120.onrender.com/api/candidatures/delete/${CandidatureId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

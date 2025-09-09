@@ -5,7 +5,7 @@ const Resultats = () => {
   const [results, setResults] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/results_agg")
+      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/results_agg")
       .then((res) => {
         console.log(res.data);
         setResults(res.data);

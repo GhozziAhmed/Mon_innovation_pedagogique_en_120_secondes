@@ -16,7 +16,7 @@ const JuryCandidatures = () => {
   const [filterDropdown, setFilterDropdown] = useState(false);
   const fetchData = () => {
     axios
-      .get("http://localhost:5000/api/jury/assignments/me", {
+      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/jury/assignments/me", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

@@ -10,7 +10,7 @@ const CandidatureDetails = () => {
   const { id } = useParams();
   const [candidature, setCandidature] = useState({});
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/candidatures/${id}`).then((res) => {
+    axios.get(`https://mon-innovation-pedagogique-en-120.onrender.com/api/candidatures/${id}`).then((res) => {
       console.log(res);
       setCandidature(res.data);
     });
@@ -30,7 +30,7 @@ const CandidatureDetails = () => {
   const handleEnvoi = () => {
     setEnvoi(true);
     axios
-      .post(`http://localhost:5000/api/votes/confirm/${id}`, { voter_email })
+      .post(`https://mon-innovation-pedagogique-en-120.onrender.com/api/votes/confirm/${id}`, { voter_email })
       .then((res) => {
         console.log(res);
         setEnvoi(false);
@@ -53,7 +53,7 @@ const CandidatureDetails = () => {
     console.log(voter_email);
     setConfirmation(true);
     axios
-      .post("http://localhost:5000/api/votes/confirm", { voter_email, code })
+      .post("https://mon-innovation-pedagogique-en-120.onrender.com/api/votes/confirm", { voter_email, code })
       .then((res) => {
         console.log(res.data);
         toast.success(res.data.message, {

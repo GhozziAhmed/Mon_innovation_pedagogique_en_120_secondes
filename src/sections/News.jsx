@@ -8,7 +8,7 @@ const News = () => {
   const [news, setNews] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/news")
+      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/news")
       .then((res) => {
         console.log(res.data);
         setNews(res.data.slice(0, 3));

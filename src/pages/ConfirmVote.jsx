@@ -9,7 +9,7 @@ const ConfirmVote = () => {
   const [confirmed, setConfirmed] = useState(false);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/votes/confirm/${token}`)
+      .get(`https://mon-innovation-pedagogique-en-120.onrender.com/api/votes/confirm/${token}`)
       .then((res) => {
         console.log(res);
         setConfirmed(true);

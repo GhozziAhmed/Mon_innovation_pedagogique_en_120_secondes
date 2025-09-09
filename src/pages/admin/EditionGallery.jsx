@@ -10,8 +10,8 @@ import DeleteArchiveModal from "../../components/DeleteArchiveModal";
 const EditionGallery = () => {
   const fetchData = async () => {
     const [photos, annee] = await Promise.all([
-      axios.get(`http://localhost:5000/api/gallery/${id}`),
-      axios.get(`http://localhost:5000/api/editions/${id}`),
+      axios.get(`https://mon-innovation-pedagogique-en-120.onrender.com/api/gallery/${id}`),
+      axios.get(`https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/${id}`),
     ]);
     setPhotos(photos.data);
     setAnnee(annee.data.annee);
@@ -30,7 +30,7 @@ const EditionGallery = () => {
     setLoading(true);
     if (modalMode === "add") {
       axios
-        .post("http://localhost:5000/api/gallery/add", formData, {
+        .post("https://mon-innovation-pedagogique-en-120.onrender.com/api/gallery/add", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -59,7 +59,7 @@ const EditionGallery = () => {
         });
     } else {
       axios
-        .put("http://localhost:5000/api/gallery/edit", formData, {
+        .put("https://mon-innovation-pedagogique-en-120.onrender.com/api/gallery/edit", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -91,7 +91,7 @@ const EditionGallery = () => {
   const handleDelete = (image_id) => {
     setLoading(true);
     axios
-      .delete(`http://localhost:5000/api/gallery/delete/${image_id}`, {
+      .delete(`https://mon-innovation-pedagogique-en-120.onrender.com/api/gallery/delete/${image_id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

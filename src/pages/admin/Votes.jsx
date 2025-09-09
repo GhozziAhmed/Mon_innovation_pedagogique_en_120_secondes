@@ -15,11 +15,11 @@ const Votes = () => {
     try {
       // Get the active edition
       const editionRes = await axios.get(
-        "http://localhost:5000/api/editions/active"
+        "https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/active"
       );
       const edition_id = editionRes.data.edition_id;
       axios
-        .get(`http://localhost:5000/api/votes/results/${edition_id}`)
+        .get(`https://mon-innovation-pedagogique-en-120.onrender.com/api/votes/results/${edition_id}`)
         .then((res) => {
           console.log(res.data);
           setVotes(res.data);

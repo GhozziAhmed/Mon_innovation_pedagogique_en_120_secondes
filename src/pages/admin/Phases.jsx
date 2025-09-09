@@ -19,10 +19,10 @@ const Phases = () => {
     "/podium.png",
   ];
   const fetchData = async () => {
-    const res = await axios.get("http://localhost:5000/api/editions/active");
+    const res = await axios.get("https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/active");
     console.log(res.data.edition_id);
     axios
-      .get(`http://localhost:5000/api/phases/${res.data.edition_id}`, {
+      .get(`https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/${res.data.edition_id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -40,7 +40,7 @@ const Phases = () => {
   }, []);
   const reset = () => {
     axios
-      .put("http://localhost:5000/api/phases/reset", {}, {
+      .put("https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/reset", {}, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

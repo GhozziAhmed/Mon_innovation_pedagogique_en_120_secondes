@@ -16,7 +16,7 @@ const Participation = () => {
     e.preventDefault();
     setSending(true);
     axios
-      .post("http://localhost:5000/api/candidatures", form, {
+      .post("https://mon-innovation-pedagogique-en-120.onrender.com/api/candidatures", form, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`, // or sessionStorage
         },
@@ -61,7 +61,7 @@ const Participation = () => {
       }
 
       try {
-        const response = await axios.get("http://localhost:5000/api/auth/me", {
+        const response = await axios.get("https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/me", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

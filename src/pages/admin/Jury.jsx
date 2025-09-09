@@ -19,12 +19,12 @@ const Jury = () => {
   const fetchData = async () => {
     try {
       const [juries_stats, juries] = await Promise.all([
-        axios.get("http://localhost:5000/api/stats/juries-counts", {
+        axios.get("https://mon-innovation-pedagogique-en-120.onrender.com/api/stats/juries-counts", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`, // or sessionStorage
           },
         }),
-        axios.get("http://localhost:5000/api/stats/juries", {
+        axios.get("https://mon-innovation-pedagogique-en-120.onrender.com/api/stats/juries", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`, // or sessionStorage
           },
@@ -43,7 +43,7 @@ const Jury = () => {
   const handleDelete = () => {
     setLoading(true);
     axios
-      .patch(`http://localhost:5000/api/auth/delete/${jury.user_id}`, jury, {
+      .patch(`https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/delete/${jury.user_id}`, jury, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -81,7 +81,7 @@ const Jury = () => {
     setLoading(true);
     if (juryModalMode === "add") {
       axios
-        .post("http://localhost:5000/api/auth/create", {...form, role : "jury"}, {
+        .post("https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/create", {...form, role : "jury"}, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -112,7 +112,7 @@ const Jury = () => {
     }
     if (juryModalMode === "edit") {
       axios
-        .put("http://localhost:5000/api/auth/edit", form, {
+        .put("https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/edit", form, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -143,7 +143,7 @@ const Jury = () => {
     }
   };
   const handleAction = (statut, id) => {
-    axios.put(`http://localhost:5000/api/auth/status/${id}`, {statut}, {
+    axios.put(`https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/status/${id}`, {statut}, {
       headers : {
         Authorization : `Bearer ${localStorage.getItem("token")}`,
       }

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const Gallery = () => {
   const [photos, setPhotos] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5000/api/gallery").then((res) => {
+    axios.get("https://mon-innovation-pedagogique-en-120.onrender.com/api/gallery").then((res) => {
       console.log(res);
       setPhotos(res.data);
     }).catch((err) => {

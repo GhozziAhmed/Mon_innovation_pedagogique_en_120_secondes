@@ -57,7 +57,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/api/auth/register", form)
+      .post("https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/register", form)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));

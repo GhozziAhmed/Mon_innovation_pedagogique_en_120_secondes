@@ -10,7 +10,7 @@ const Partners = () => {
   const [partners, setPartners] = useState([]);
   const fetchData = () => {
     axios
-      .get("http://localhost:5000/api/partners")
+      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/partners")
       .then((res) => {
         console.log(res.data);
         setPartners(res.data);
@@ -30,7 +30,7 @@ const Partners = () => {
     setModalLoading(true);
     if (modalMode === "add") {
       axios
-        .post("http://localhost:5000/api/partners", form, {
+        .post("https://mon-innovation-pedagogique-en-120.onrender.com/api/partners", form, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -60,7 +60,7 @@ const Partners = () => {
     } else {
       axios
         .put(
-          `http://localhost:5000/api/partners/${selectedData.partenaire_id}`,
+          `https://mon-innovation-pedagogique-en-120.onrender.com/api/partners/${selectedData.partenaire_id}`,
           form,
           {
             headers: {
@@ -98,7 +98,7 @@ const Partners = () => {
     setModalLoading(true);
     axios
       .delete(
-        `http://localhost:5000/api/partners/${partnerId}`,{
+        `https://mon-innovation-pedagogique-en-120.onrender.com/api/partners/${partnerId}`,{
             headers : {
                 Authorization : `Bearer ${localStorage.getItem("token")}`,
             }

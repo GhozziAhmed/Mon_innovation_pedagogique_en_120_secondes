@@ -10,7 +10,7 @@ const ForgotPassword = () => {
     message : ""
   });
   const handleForgot = () => {
-    axios.post("http://localhost:5000/api/auth/forgot-password", { email }).then((res) => {
+    axios.post("https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/forgot-password", { email }).then((res) => {
         console.log(res);
         setError({error: false, message : res.data.message});
     }).catch((err) => {

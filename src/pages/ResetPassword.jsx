@@ -16,7 +16,7 @@ const ResetPassword = () => {
   const handleReset = () => {
     console.log(form)
     axios
-      .post("http://localhost:5000/api/auth/reset-password", form)
+      .post("https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/reset-password", form)
       .then((res) => {
         navigate("/login");
         console.log(res);

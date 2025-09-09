@@ -15,7 +15,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/api/auth/login", login)
+      .post("https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/login", login)
       .then((res) => {
         console.log(res);
         localStorage.setItem("token", res.data.token);
