@@ -200,6 +200,18 @@ const AdminLayout = () => {
             >
               Partenaires
             </NavLink>
+            <NavLink
+              to="/admin/phases"
+              className={({ isActive }) =>
+                `flex-1 flex justify-center rounded shadow-md py-2 px-4 ${
+                  isActive
+                    ? "bg-[#004C91] text-white"
+                    : "bg-zinc-200 text-zinc-700"
+                }`
+              }
+            >
+              Phases
+            </NavLink>
           </div>
         </div>
         <Outlet />

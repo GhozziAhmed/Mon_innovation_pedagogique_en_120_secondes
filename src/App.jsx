@@ -32,6 +32,7 @@ import JuryLayout from "./layouts/JuryLayout";
 import JuryStats from "./pages/jury/JuryStats";
 import JuryCandidatures from "./pages/jury/JuryCandidatures";
 import Evaluation from "./pages/jury/Evaluation";
+import Phases from "./pages/admin/Phases";
 
 const App = () => {
   return (
@@ -66,6 +67,7 @@ const App = () => {
           <Route path="/admin/evaluations" element={<Evaluations />}/>
           <Route path="/admin/results" element={<ResultatsAdmin />}/>
           <Route path="/admin/partners" element={<Partners />}/>
+          <Route path="/admin/phases" element={<Phases />}/>
         </Route>
         <Route path="/jury" element={<JuryLayout />}>
           <Route path="/jury/stats" element={<JuryStats />}/>

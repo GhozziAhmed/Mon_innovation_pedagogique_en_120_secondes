@@ -12,7 +12,7 @@ const PartnerModal = ({ mode, onClose, onSave, data, loading }) => {
       site_web: "",
     }
   );
-  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUpload = (e) => {
     const file = e.target.files?.[0];
     if (file) {
       setForm({ ...form, image: { file, preview: URL.createObjectURL(file) } });

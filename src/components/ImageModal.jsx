@@ -16,7 +16,7 @@ const ImageModal = ({ onClose, mode, data, onSave, loading }) => {
   //     null
   //   );
 
-  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUpload = (e) => {
     const file = e.target.files?.[0];
     if (file) {
       setForm({ ...form, image: { file, preview: URL.createObjectURL(file) } });

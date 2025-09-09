@@ -103,7 +103,7 @@ const Participation = () => {
         <div className="mt-10 w-full flex justify-center">
           <div className="">
             <img src="/logo_transparent.png" alt="" className="w-75 mx-auto" />
-            <div className="bg-white border-zinc-300 shadow-md border border-zinc-200 rounded p-10 flex flex-col items-stretch">
+            <div className="bg-white shadow-md border border-zinc-200 rounded p-10 flex flex-col items-stretch">
               <h1 className="text-3xl mb-5">Formulaire de participation</h1>
               <form action="" className="space-y-6">
                 <div className="flex flex-col space-y-1">

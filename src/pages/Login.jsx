@@ -12,7 +12,7 @@ const Login = () => {
   });
   const [error, setError] = useState("");
   const [hidden, setHidden] = useState(true);
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:5000/api/auth/login", login)
@@ -75,12 +75,12 @@ const Login = () => {
                   setLogin({ ...login, mot_de_passe: e.target.value })
                 }
               />
-              <button className="cursor-pointer" onClick={(e) => {
-                e.preventDefault();
+              <span className="cursor-pointer" onClick={() => {
+                // e.preventDefault();
                 setHidden(!hidden);
               }}>
                 <img src={`/${hidden ? "hidden" : "visible"}.png`} alt="" className="w-7"/>
-              </button>
+              </span>
             </div>
           </div>
           <Link to="/login/forgot-password" className="text-[#004C91]">

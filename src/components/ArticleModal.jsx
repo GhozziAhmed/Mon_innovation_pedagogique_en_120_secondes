@@ -12,7 +12,7 @@ const ArticleModal = ({ mode, onClose, onSave, data, loading}) => {
           image: null,
         }
       );
-      const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const handleUpload = (e) => {
         const file = e.target.files?.[0];
         if (file) {
           setForm({ ...form, image: { file, preview: URL.createObjectURL(file) } });

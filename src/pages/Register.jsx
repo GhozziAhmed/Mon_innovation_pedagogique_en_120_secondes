@@ -54,7 +54,7 @@ const Register = () => {
     antecedents: "",
   });
   const [error, setError] = useState("");
-  const handleRegister = async (e: React.FormEvent) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:5000/api/auth/register", form)
