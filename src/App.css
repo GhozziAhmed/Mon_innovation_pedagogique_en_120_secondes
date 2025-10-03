@@ -10,3 +10,44 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+/* Add this block to your global CSS file */
+
+/* 1. Define the utility class for hiding scrollbars */
+.scrollbar-hide {
+    /* For Firefox */
+    scrollbar-width: none;
+    /* For IE and Edge */
+    -ms-overflow-style: none; 
+}
+
+/* 2. Hide scrollbar for Chrome, Safari, and Opera */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* Add this to your global CSS file to define the 'custom-scrollbar' class */
+.custom-scrollbar {
+  /* Set a fallback width for the scrollbar track */
+  scrollbar-width: thin; 
+  /* Set a color for the scrollbar thumb in Firefox */
+  scrollbar-color: #004C91 transparent; /* thumb color | track color */
+}
+
+/* Scrollbar Track (the bar itself) */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px; /* Make the scrollbar thin */
+  /* background-color: #F3F4F6; Light gray background */
+}
+
+/* Scrollbar Thumb (the handle you drag) */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #004C91; /* Your primary blue color */
+  border-radius: 10px; /* Rounded edges */
+  border: 1px solid #E5E7EB; /* Slight border to lift it from the track */
+}
+
+/* Scrollbar Thumb on Hover */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #003B75; /* A darker shade of blue on hover */
+}

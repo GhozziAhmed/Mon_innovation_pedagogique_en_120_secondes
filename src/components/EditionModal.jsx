@@ -1,5 +1,5 @@
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 const EditionModal = ({ onClose, mode, data, onSave, loading }) => {
@@ -12,74 +12,113 @@ const EditionModal = ({ onClose, mode, data, onSave, loading }) => {
       lieu: "",
     }
   );
+
+  const isFormValid = () => {
+    return form.annee && form.theme && form.date_debut && form.date_fin && form.lieu;
+  };
+
   return (
-    <div className="fixed inset-0 bg-black/40 flex justify-center items-center px-8 z-2000">
-      <div className="bg-white py-5 px-10 rounded flex flex-col gap-5 items-stretch max-w-full">
-        <div className="flex justify-end">
-          <FontAwesomeIcon
-            icon={faXmark}
-            className="text-2xl text-zinc-600 cursor-pointer"
-            onClick={onClose}
-          />
-        </div>
-        <h1 className="text-2xl text-zinc-800 font-semibold">
-          {mode === "add" ? "Créer une nouvelle édition" : "Modifier"}
-        </h1>
-        <div className="flex flex-col">
-          <span className="">Année</span>
-          <input
-            type="text"
-            className="border border-zinc-600 rounded focus:outline-none px-2 py-1"
-            value={form.annee}
-            onChange={(e) => setForm({ ...form, annee: e.target.value })}
-          />
-        </div>
-        <div className="flex flex-col">
-          <span>Thème</span>
-          <input
-            type="text"
-            className="border border-zinc-600 rounded focus:outline-none px-2 py-1"
-            value={form.theme}
-            onChange={(e) => setForm({ ...form, theme: e.target.value })}
-          />
-        </div>
-        <div className="flex flex-col md:flex-row gap-5">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm p-4 animate-fadeIn">
+      <div className="relative w-full max-w-xl rounded-xl bg-white p-8 shadow-2xl transform scale-95 md:scale-100 transition-transform duration-300">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-800 transition-colors"
+        >
+          <FontAwesomeIcon icon={faXmark} className="text-2xl" />
+        </button>
+        <h2 className="text-3xl font-extrabold text-zinc-800 mb-2">
+          {mode === "add" ? "Créer une nouvelle édition" : "Modifier l'édition"}
+        </h2>
+        <p className="text-zinc-500 mb-6">
+          Veuillez remplir les informations pour {mode === "add" ? "créer une nouvelle édition" : "mettre à jour cette édition"}.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col">
-            <span>Date de début</span>
+            <label htmlFor="annee" className="font-semibold text-zinc-700 mb-1">
+              Année
+            </label>
             <input
+              id="annee"
               type="text"
-              className="border border-zinc-600 rounded focus:outline-none px-2 py-1"
-              value={form.date_debut.substring(0,10)}
+              className="w-full rounded-lg border border-zinc-300 px-4 py-2 bg-zinc-50 text-zinc-800 transition-colors focus:border-[#004C91] focus:outline-none focus:ring-1 focus:ring-[#004C91]"
+              value={form.annee}
+              onChange={(e) => setForm({ ...form, annee: e.target.value })}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="theme" className="font-semibold text-zinc-700 mb-1">
+              Thème
+            </label>
+            <input
+              id="theme"
+              type="text"
+              className="w-full rounded-lg border border-zinc-300 px-4 py-2 bg-zinc-50 text-zinc-800 transition-colors focus:border-[#004C91] focus:outline-none focus:ring-1 focus:ring-[#004C91]"
+              value={form.theme}
+              onChange={(e) => setForm({ ...form, theme: e.target.value })}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="date_debut" className="font-semibold text-zinc-700 mb-1">
+              Date de début
+            </label>
+            <input
+              id="date_debut"
+              type="date"
+              className="w-full rounded-lg border border-zinc-300 px-4 py-2 bg-zinc-50 text-zinc-800 transition-colors focus:border-[#004C91] focus:outline-none focus:ring-1 focus:ring-[#004C91]"
+              value={form.date_debut}
               onChange={(e) => setForm({ ...form, date_debut: e.target.value })}
             />
           </div>
           <div className="flex flex-col">
-            <span>Date de fin</span>
+            <label htmlFor="date_fin" className="font-semibold text-zinc-700 mb-1">
+              Date de fin
+            </label>
             <input
-              type="text"
-              className="border border-zinc-600 rounded focus:outline-none px-2 py-1"
-              value={form.date_fin.substring(0,10)}
+              id="date_fin"
+              type="date"
+              className="w-full rounded-lg border border-zinc-300 px-4 py-2 bg-zinc-50 text-zinc-800 transition-colors focus:border-[#004C91] focus:outline-none focus:ring-1 focus:ring-[#004C91]"
+              value={form.date_fin}
               onChange={(e) => setForm({ ...form, date_fin: e.target.value })}
             />
           </div>
+          <div className="flex flex-col col-span-1 md:col-span-2">
+            <label htmlFor="lieu" className="font-semibold text-zinc-700 mb-1">
+              Lieu de la finale
+            </label>
+            <input
+              id="lieu"
+              type="text"
+              className="w-full rounded-lg border border-zinc-300 px-4 py-2 bg-zinc-50 text-zinc-800 transition-colors focus:border-[#004C91] focus:outline-none focus:ring-1 focus:ring-[#004C91]"
+              value={form.lieu}
+              onChange={(e) => setForm({ ...form, lieu: e.target.value })}
+            />
+          </div>
         </div>
-        <div className="flex flex-col">
-          <span>Lieu de la finale</span>
-          <input
-            type="text"
-            className="border border-zinc-600 rounded focus:outline-none px-2 py-1"
-            value={form.lieu}
-            onChange={(e) => setForm({ ...form, lieu: e.target.value })}
-          />
-        </div>
-        <div className="flex justify-end space-x-5">
+
+        <div className="mt-8 flex justify-end space-x-4">
           <button
-            className="flex-1 bg-[#5599FF] border-2 border-[#5599FF] text-white py-2 rounded cursor-pointer"
-            onClick={() => {
-                onSave(form)
-            }}
+            onClick={onClose}
+            className="rounded-lg border border-zinc-300 bg-white px-6 py-2.5 font-semibold text-zinc-700 transition-colors hover:bg-zinc-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={loading}
+            type="button"
           >
-            {loading ? "Chargement" : mode === "add" ? "Créez" : "Sauvegardez"}
+            Annuler
+          </button>
+          <button
+            className={`rounded-lg px-6 py-2.5 font-bold text-white transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none
+              ${mode === "add" ? "bg-green-600 hover:bg-green-700" : "bg-[#004C91] hover:bg-[#003B70]"}`}
+            onClick={() => onSave(form)}
+            disabled={loading || !isFormValid()}
+            type="submit"
+          >
+            {loading ? (
+              <FontAwesomeIcon icon={faSpinner} spin className="mr-2" />
+            ) : mode === "add" ? (
+              "Créer"
+            ) : (
+              "Sauvegarder"
+            )}
           </button>
         </div>
       </div>

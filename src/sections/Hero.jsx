@@ -3,28 +3,29 @@ import { useTranslation } from "react-i18next";
 
 const Hero = () => {
   const { t } = useTranslation();
-  const hero = t("hero")
   return (
     <div className="bg-[#4AADCE] w-full py-10 md:py-20 px-8 md:px-10 lg:px-20 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
       <div className="w-full md:w-1/2 flex flex-col text-center md:text-left gap-10 mb-10 md:mb-0">
         <h1 className="text-5xl lg:text-6xl leading-13 lg:leading-17 font-semibold text-white">
-          Mon <span className="text-[#FCA413]">Innovation</span>
-          <br /> Pédagogique<br /> En{" "}
-          <span className="text-[#FCA413]">120 Secondes</span>
+          {t("hero.title.part1")}{" "}
+          <span className="text-[#FCA413]">{t("hero.title.part3")}</span>
+          <br /> {t("hero.title.part2")}
+          <br /> {t("hero.title.part4")}{" "}
+          <span className="text-[#FCA413]">{t("hero.title.part5")}</span>
         </h1>
-        <p className="text-white text-lg lg:text-xl">{hero.text}</p>
+        <p className="text-white text-lg lg:text-xl">{t("hero.description")}</p>
         <div className="flex gap-2 w-full justify-center md:justify-start">
           <Link
             to="/participation"
             className="py-2 px-6 cursor-pointer rounded-full text-white bg-[#FCA413]"
           >
-            {hero.participate}
+            {t("hero.buttons.participate")}
           </Link>
           <Link
             to="/vote"
             className="py-2 px-6 cursor-pointer rounded-full text-white border border-[#FCA413]"
           >
-            {hero.vote}
+            {t("hero.buttons.vote")}
           </Link>
         </div>
       </div>

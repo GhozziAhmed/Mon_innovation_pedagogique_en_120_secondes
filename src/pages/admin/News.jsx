@@ -9,23 +9,29 @@ import DeleteArchiveModal from "../../components/DeleteArchiveModal";
 const News = () => {
   const [news, setNews] = useState([]);
   const fetchData = () => {
-    axios.get("https://mon-innovation-pedagogique-en-120.onrender.com/api/news").then((res) => {
-      console.log(res.data);
-      setNews(res.data);
-    });
+    axios
+      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/news")
+      .then((res) => {
+        setNews(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
+
   useEffect(() => {
     fetchData();
   }, []);
+
   const [modalLoading, setModalLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState("");
   const [selectedData, setSelectedData] = useState(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [articleId, setArticleId] = useState(0);
+
   const onSave = (form) => {
     setModalLoading(true);
-    console.log(form);
     if (modalMode === "add") {
       axios
         .post("https://mon-innovation-pedagogique-en-120.onrender.com/api/news", form, {
@@ -34,7 +40,6 @@ const News = () => {
           },
         })
         .then((res) => {
-          console.log(res);
           fetchData();
           setModalLoading(false);
           setModalOpen(false);
@@ -46,9 +51,8 @@ const News = () => {
           });
         })
         .catch((err) => {
-          console.log(err);
           setModalLoading(false);
-          toast.error(err.response.data.error, {
+          toast.error(err.response?.data?.error || "Une erreur est survenue.", {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
@@ -63,7 +67,6 @@ const News = () => {
           },
         })
         .then((res) => {
-          console.log(res);
           fetchData();
           setModalLoading(false);
           setModalOpen(false);
@@ -75,9 +78,8 @@ const News = () => {
           });
         })
         .catch((err) => {
-          console.log(err);
           setModalLoading(false);
-          toast.error(err.response.data.error, {
+          toast.error(err.response?.data?.error || "Une erreur est survenue.", {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
@@ -86,6 +88,7 @@ const News = () => {
         });
     }
   };
+
   const handleDelete = () => {
     setModalLoading(true);
     axios
@@ -95,7 +98,6 @@ const News = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setModalLoading(false);
         setDeleteModalOpen(false);
         fetchData();
@@ -107,11 +109,9 @@ const News = () => {
         });
       })
       .catch((err) => {
-        console.log(err);
         setModalLoading(false);
         setDeleteModalOpen(false);
-        fetchData();
-        toast.error(err.response.data.error, {
+        toast.error(err.response?.data?.error || "Une erreur est survenue.", {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
@@ -119,19 +119,20 @@ const News = () => {
         });
       });
   };
+
   return (
-    <div className="px-4 md:px-6 lg:px-20 py-10">
-      <div className="flex justify-between items-center mb-5">
-        <div className="space-y-2">
-          <h1 className="text-4xl text-zinc-800 font-semibold">
-            Gestion Les Actualités
+    <div className="p-4 md:p-8 lg:p-12">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-8 gap-4 md:gap-0">
+        <div className="space-y-2 text-center md:text-left">
+          <h1 className="text-3xl md:text-4xl text-zinc-800 font-semibold">
+            Gestion des Actualités
           </h1>
-          <p className="text-zinc-800">
-            Ajouter, Modifier ou Supprimer une actualités
+          <p className="text-zinc-600">
+            Ajouter, modifier ou supprimer une actualité
           </p>
         </div>
         <button
-          className="bg-[#004C91] rounded px-4 py-2 text-white text-2xl cursor-pointer flex items-center gap-2"
+          className="bg-[#004C91] rounded-lg px-6 py-2.5 text-white font-semibold transition-colors hover:bg-[#003B70] flex items-center gap-2"
           onClick={() => {
             setModalOpen(true);
             setModalMode("add");
@@ -142,27 +143,35 @@ const News = () => {
           Ajouter
         </button>
       </div>
-      <div className="overflow-x-auto">
-        <table className="min-w-full border-collapse shadow">
+
+      <div className="overflow-x-auto rounded-lg shadow-md">
+        <table className="min-w-full">
           <thead>
-            <tr className="border-b text-zinc-700">
-              <th className="p-3 text-left">Titre</th>
-              <th className="p-3 text-left">Image</th>
-              <th className="p-3 text-left">Actions</th>
+            <tr className="bg-zinc-100 border-b border-zinc-200 text-zinc-700">
+              <th className="p-4 text-left font-semibold">Titre</th>
+              <th className="p-4 text-left font-semibold">Image</th>
+              <th className="p-4 font-semibold text-center md:text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {news &&
+            {news.length > 0 ? (
               news.map((n) => (
-                <tr key={n.news_id} className="border-b border-zinc-300">
-                  <td className="p-3">{n.titre}</td>
-                  <td className="p-3">
-                    <img src={n.image_url} alt="" className="w-30" />
+                <tr
+                  key={n.news_id}
+                  className="border-b border-zinc-200 last:border-0 hover:bg-zinc-50 transition-colors"
+                >
+                  <td className="p-4 text-zinc-700 font-medium">{n.titre}</td>
+                  <td className="p-4">
+                    <img
+                      src={n.image_url}
+                      alt={n.titre}
+                      className="w-24 h-16 object-cover rounded-md shadow"
+                    />
                   </td>
-                  <td className="p-3">
-                    <div className="flex gap-5">
+                  <td className="p-4">
+                    <div className="flex flex-col sm:flex-row gap-2">
                       <button
-                        className="rounded py-2 px-4 text-white bg-[#004C91] cursor-pointer"
+                        className="rounded-lg py-2 px-4 text-white cursor-pointer bg-[#004C91] font-medium transition-colors hover:bg-[#003B70]"
                         onClick={() => {
                           setModalOpen(true);
                           setModalMode("edit");
@@ -171,19 +180,30 @@ const News = () => {
                       >
                         Modifier
                       </button>
-                      <button className="rounded py-2 px-4 text-white bg-red-500 cursor-pointer" onClick={() => {
-                        setDeleteModalOpen(true);
-                        setArticleId(n.news_id)
-                      }}>
+                      <button
+                        className="rounded-lg py-2 px-4 text-white cursor-pointer bg-red-600 font-medium transition-colors hover:bg-red-700"
+                        onClick={() => {
+                          setDeleteModalOpen(true);
+                          setArticleId(n.news_id);
+                        }}
+                      >
                         Supprimer
                       </button>
                     </div>
                   </td>
                 </tr>
-              ))}
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3" className="p-4 text-center text-zinc-500">
+                  Aucune actualité trouvée.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
+
       {modalOpen && (
         <ArticleModal
           mode={modalMode}
@@ -193,9 +213,14 @@ const News = () => {
           loading={modalLoading}
         />
       )}
-      {
-        deleteModalOpen && <DeleteArchiveModal mode={"supprimez"} onClose={() => setDeleteModalOpen(false)} onSave={handleDelete} loading={modalLoading}/>
-      }
+      {deleteModalOpen && (
+        <DeleteArchiveModal
+          mode={"supprimez"}
+          onClose={() => setDeleteModalOpen(false)}
+          onSave={handleDelete}
+          loading={modalLoading}
+        />
+      )}
     </div>
   );
 };

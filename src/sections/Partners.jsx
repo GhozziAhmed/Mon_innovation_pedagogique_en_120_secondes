@@ -22,7 +22,7 @@ const Partners = () => {
   return (
     <div className="w-full px-8 md:px-10 lg:px-20 py-20">
       <h1 className="text-[#004C91] text-3xl text-center font-semibold mb-15">
-        {header}
+        Nos Partenaires
       </h1>
       {partners.length > 0 && (
         <Swiper

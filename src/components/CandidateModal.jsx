@@ -1,4 +1,6 @@
 import DynamicVideoPlayer from "./DynamicVideoPlayer ";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const CandidateModal = ({
   data,
@@ -8,56 +10,60 @@ const CandidateModal = ({
   rejectLoading,
 }) => {
   return (
-    <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
-      <div className="bg-white p-5 rounded">
-        <h1 className="text-3xl text-zinc-800 font-semibold text-center mb-5">
-          Candidature de {data.nom} {data.prenom}
-        </h1>
-        <div className="flex flex-col mb-5">
-          <span className="font-bold">
-            Etablissement :{" "}
-            <span className="font-normal">{data.etablissement}</span>
-          </span>
-          <span className="font-bold">
-            Titre : <span className="font-normal">{data.titre}</span>
-          </span>
-          <span className="font-bold mb-5">
-            Description :<br />
-            <span className="font-normal">{data.description}</span>
-          </span>
-          <div>
-            <DynamicVideoPlayer url={data.fichier_lien} />
+    <div className="fixed inset-0 bg-black/50 flex justify-center items-center p-4 z-50">
+      <div className="bg-white p-6 md:p-8 rounded-xl shadow-2xl w-full max-w-2xl overflow-y-auto max-h-[90vh]">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl md:text-3xl font-bold text-zinc-900">
+            Candidature de {data.nom} {data.prenom}
+          </h1>
+        </div>
+
+        <div className="flex flex-col gap-4 mb-6">
+          <div className="text-zinc-700">
+            <span className="font-semibold text-zinc-900">Etablissement: </span>
+            <span>{data.etablissement}</span>
+          </div>
+          <div className="text-zinc-700">
+            <span className="font-semibold text-zinc-900">Titre: </span>
+            <span>{data.titre}</span>
+          </div>
+          <div className="text-zinc-700">
+            <span className="font-semibold text-zinc-900">Description:</span>
+            <p className="mt-1 font-normal leading-relaxed">{data.description}</p>
           </div>
         </div>
-        <div className="space-x-5 flex justify-center">
-            {(data.statut === "rejete" || data.statut === "en_attente") && (
+
+        <div className="mb-6">
+          <DynamicVideoPlayer url={data.fichier_lien} />
+        </div>
+
+        <div className="flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-4">
+          {data.statut !== "rejete" && (
             <button
-              className={`${
-                preLoading ? "bg-[#004C91]/50 cursor-default" : "bg-[#004C91]"
-              } rounded py-2 px-4 text-white cursor-pointer`}
+              className="w-full sm:w-auto px-6 py-3 rounded-lg text-white cursor-pointer font-semibold transition-colors bg-red-600 hover:bg-red-700 disabled:bg-zinc-400 disabled:cursor-not-allowed"
+              disabled={rejectLoading}
+              onClick={() => onSave(data.candidature_id, "rejete")}
+            >
+              {rejectLoading ? "Chargement..." : "Rejeter"}
+            </button>
+          )}
+
+          {data.statut !== "preselectionnee" && (
+            <button
+              className="w-full sm:w-auto px-6 py-3 rounded-lg text-white cursor-pointer font-semibold transition-colors bg-[#004C91] hover:bg-[#003B70] disabled:bg-zinc-400 disabled:cursor-not-allowed"
               disabled={preLoading}
               onClick={() => onSave(data.candidature_id, "preselectionner")}
             >
               {preLoading ? "Chargement..." : "Preselectionner"}
             </button>
           )}
-          {(data.statut === "preselectionnee" ||
-            data.statut === "en_attente") && (
-              <button
-                className={`${
-                  rejectLoading ? "bg-red-300 cursor-default" : "bg-red-500"
-                } rounded py-2 px-4 text-white cursor-pointer`}
-                disabled={rejectLoading}
-                onClick={() => onSave(data.candidature_id, "rejete")}
-              >
-                {rejectLoading ? "Chargement..." : "Rejeter"}
-              </button>
-            )}
+
           <button
-            className="border border-zinc-600 text-zinc-600 rounded py-2 px-4 cursor-pointer"
+            className="w-full sm:w-auto px-6 py-3 rounded-lg text-zinc-700 cursor-pointer font-semibold border border-zinc-300 hover:bg-zinc-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={onClose}
+            disabled={preLoading || rejectLoading}
           >
-            Annuler
+            Fermer
           </button>
         </div>
       </div>

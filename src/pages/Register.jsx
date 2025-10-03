@@ -2,58 +2,73 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeft,
   faArrowRight,
-  faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
+// 💡 Import the new standalone component
+import DropdownField from "../components/DropdownField"; 
 
 const Register = () => {
   const navigate = useNavigate();
+
+  // 💡 Ref for click-outside logic
+  const dropdownContainerRef = useRef(null); 
+  
+  // Data Arrays
   const countries = [
-    "Tunisia",
-    "Algeria",
-    "Gabon",
-    "Togo",
-    "Benin",
-    "Cameroon",
+    "Tunisie", "Algerie", "Gabon", "Togo", "Benin", "Cameroun",
   ];
   const statuts = [
-    "Étudiant",
-    "Enseignant",
-    "Chercheur",
-    "Salarié",
-    "Entrepreneur",
-    "Sans Emploi",
-    "Autre",
+    "Étudiant", "Enseignant", "Chercheur", "Salarié", 
+    "Entrepreneur", "Sans Emploi", "Autre",
   ];
   const exercice_level = [
-    "Lycée",
-    "License",
-    "Master",
-    "Doctorat",
-    "Jeune Professionnel",
-    "Professionnel",
+    "Lycée", "License", "Master", "Doctorat", 
+    "Jeune Professionnel", "Professionnel",
   ];
-  const [genderDropDown, setGenderDropDown] = useState(false);
-  const [countryDropDown, setCountryDropDown] = useState(false);
-  const [statusDropDown, setStatusDropDown] = useState(false);
-  const [niveauDropDown, setNiveauDropDown] = useState(false);
+  const genders = ["Homme", "Femme"];
+
+  const [dropdownStates, setDropdownStates] = useState({
+    gender: false,
+    country: false,
+    status: false,
+    niveau: false,
+  });
+
   const [hidden, setHidden] = useState(true);
   const [form, setForm] = useState({
-    nom: "",
-    prenom: "",
-    genre: "",
-    statut: "",
-    niveau_exercice: "",
-    specialite: "",
-    email: "",
-    mot_de_passe: "",
-    pays: "",
-    etablissement: "",
+    nom: "", prenom: "", genre: "", statut: "",
+    niveau_exercice: "", specialite: "", email: "", 
+    mot_de_passe: "", pays: "", etablissement: "",
     antecedents: "",
   });
   const [error, setError] = useState("");
+
+  // 💡 Centralized form update handler for dropdowns
+  const handleDropdownSelect = useCallback((key, value) => {
+    setForm(prevForm => ({ ...prevForm, [key]: value }));
+  }, []);
+
+  // 💡 Effect to handle clicks outside the form container
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownContainerRef.current &&
+        !dropdownContainerRef.current.contains(event.target)
+      ) {
+        setDropdownStates({
+          gender: false, country: false, status: false, niveau: false,
+        });
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []); // Empty dependency array means this runs once on mount
+
   const handleRegister = async (e) => {
     e.preventDefault();
     axios
@@ -66,14 +81,13 @@ const Register = () => {
       .catch((err) => {
         console.error(err);
         if (err.response) {
-          // Backend error (like duplicate email, validation, etc.)
           setError(err.response.data.error || "Une erreur est survenue.");
         } else {
-          // Network error
           setError("Impossible de se connecter au serveur.");
         }
       });
   };
+
   return (
     <div className="grid grid-cols-12">
       <div className="col-span-12 lg:col-span-5 p-7">
@@ -97,11 +111,17 @@ const Register = () => {
             Bienvenue, Créez votre compte en 2min
           </h3>
         </div>
-        <form action="" className="mt-5">
-          {error != "" && (
-            <span className="text-red-600 w-full text-left mb-5">{error}</span>
+        <form 
+            action="" 
+            className="mt-5" 
+            onSubmit={handleRegister} 
+            ref={dropdownContainerRef}
+        >
+          {error && (
+            <span className="text-red-600 w-full text-left mb-5 block">{error}</span>
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* Input: Nom */}
             <div className="border-b-2 flex items-center">
               <img src="/account_circle.png" alt="" />
               <input
@@ -112,6 +132,7 @@ const Register = () => {
                 onChange={(e) => setForm({ ...form, nom: e.target.value })}
               />
             </div>
+            {/* Input: Prenom */}
             <div className="border-b-2 flex items-center">
               <img src="/account_circle.png" alt="" />
               <input
@@ -122,117 +143,47 @@ const Register = () => {
                 onChange={(e) => setForm({ ...form, prenom: e.target.value })}
               />
             </div>
-            <div
-              className="border-b-2 flex items-center relative cursor-pointer"
-              onClick={() => setGenderDropDown(!genderDropDown)}
-            >
-              <img src="/male.png" alt="" />
-              <span
-                className={`${
-                  form.genre === "" ? "text-zinc-500" : "text-zinc-900"
-                } p-2`}
-              >
-                {form.genre || "Genre"}
-              </span>
-              <div className="flex justify-center items-center size-7 border-2 border-zinc-500 rounded-full absolute top-1/2 transform -translate-1/2 right-0 cursor-pointer">
-                <FontAwesomeIcon
-                  icon={faChevronDown}
-                  className="text-zinc-500"
-                />
-              </div>
-              {genderDropDown && (
-                <div className="absolute bg-white w-full top-[105%] border divide-zinc-600 z-1000">
-                  <div
-                    className="p-2 hover:bg-zinc-200 cursor-pointer"
-                    onClick={() => {
-                      setGenderDropDown(false);
-                      setForm({ ...form, genre: "Homme" });
-                    }}
-                  >
-                    Homme
-                  </div>
-                  <div
-                    className="p-2 hover:bg-zinc-200 cursor-pointer"
-                    onClick={() => {
-                      setGenderDropDown(false);
-                      setForm({ ...form, genre: "Femme" });
-                    }}
-                  >
-                    Femme
-                  </div>
-                </div>
-              )}
-            </div>
-            <div
-              className="border-b-2 flex items-center relative cursor-pointer"
-              onClick={() => setStatusDropDown(!statusDropDown)}
-            >
-              <img src="/location_away.png" alt="" />
-              <span
-                className={`${
-                  form.statut === "" ? "text-zinc-500" : "text-zinc-900"
-                } p-2`}
-              >
-                {form.statut || "Statut"}
-              </span>
-              <div className="flex justify-center items-center size-7 border-2 border-zinc-500 rounded-full absolute top-1/2 transform -translate-1/2 right-0 cursor-pointer">
-                <FontAwesomeIcon
-                  icon={faChevronDown}
-                  className="text-zinc-500"
-                />
-              </div>
-              {statusDropDown && (
-                <div className="absolute bg-white w-full top-[105%] border divide-zinc-600 h-25 overflow-auto z-1000">
-                  {statuts.map((s) => (
-                    <div
-                      key={s}
-                      className="p-2 hover:bg-zinc-200 cursor-pointer"
-                      onClick={() => {
-                        setStatusDropDown(false);
-                        setForm({ ...form, statut: s });
-                      }}
-                    >
-                      {s}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div
-              className="border-b-2 flex items-center relative cursor-pointer"
-              onClick={() => setNiveauDropDown(!niveauDropDown)}
-            >
-              <img src="/location_away.png" alt="" />
-              <span
-                className={`${
-                  form.niveau_exercice === "" ? "text-zinc-500" : "text-zinc-900"
-                } p-2`}
-              >
-                {form.niveau_exercice || "Niveau d'exercice"}
-              </span>
-              <div className="flex justify-center items-center size-7 border-2 border-zinc-500 rounded-full absolute top-1/2 transform -translate-1/2 right-0 cursor-pointer">
-                <FontAwesomeIcon
-                  icon={faChevronDown}
-                  className="text-zinc-500"
-                />
-              </div>
-              {niveauDropDown && (
-                <div className="absolute bg-white w-full top-[105%] border divide-zinc-600 h-25 overflow-auto z-1000">
-                  {exercice_level.map((l) => (
-                    <div
-                      key={l}
-                      className="p-2 hover:bg-zinc-200 cursor-pointer"
-                      onClick={() => {
-                        setNiveauDropDown(false);
-                        setForm({ ...form, niveau_exercice: l });
-                      }}
-                    >
-                      {l}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+
+            {/* Dropdown: Genre */}
+            <DropdownField
+              icon="/male.png"
+              label="Genre"
+              formKey="genre"
+              dropdownKey="gender"
+              options={genders}
+              selectedValue={form.genre}
+              onSelect={handleDropdownSelect}
+              dropdownStates={dropdownStates}
+              setDropdownStates={setDropdownStates}
+            />
+
+            {/* Dropdown: Statut */}
+            <DropdownField
+              icon="/location_away.png"
+              label="Statut"
+              formKey="statut"
+              dropdownKey="status"
+              options={statuts}
+              selectedValue={form.statut}
+              onSelect={handleDropdownSelect}
+              dropdownStates={dropdownStates}
+              setDropdownStates={setDropdownStates}
+            />
+            
+            {/* Dropdown: Niveau d'exercice */}
+            <DropdownField
+              icon="/location_away.png"
+              label="Niveau d'exercice"
+              formKey="niveau_exercice"
+              dropdownKey="niveau"
+              options={exercice_level}
+              selectedValue={form.niveau_exercice}
+              onSelect={handleDropdownSelect}
+              dropdownStates={dropdownStates}
+              setDropdownStates={setDropdownStates}
+            />
+
+            {/* Input: Specialite */}
             <div className="border-b-2 flex items-center">
               <img src="/interactive_space.png" alt="" />
               <input
@@ -245,6 +196,8 @@ const Register = () => {
                 }
               />
             </div>
+
+            {/* Input: Email */}
             <div className="border-b-2 flex items-center md:col-span-2">
               <img src="/alternate_email.png" alt="" />
               <input
@@ -255,6 +208,8 @@ const Register = () => {
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
               />
             </div>
+
+            {/* Input: Mot De Passe */}
             <div className="border-b-2 flex items-center md:col-span-2 pr-2">
               <img src="/lock.png" alt="" />
               <input
@@ -273,41 +228,21 @@ const Register = () => {
                 <img src={`/${hidden ? "hidden" : "visible"}.png`} alt="" className="w-7"/>
               </button>
             </div>
-            <div
-              className="border-b-2 flex items-center relative cursor-pointer"
-              onClick={() => setCountryDropDown(!countryDropDown)}
-            >
-              <img src="/globe_uk.png" alt="" />
-              <span
-                className={`${
-                  form.pays === "" ? "text-zinc-500" : "text-zinc-900"
-                } p-2`}
-              >
-                {form.pays || "Pays"}
-              </span>
-              <div className="flex justify-center items-center size-7 border-2 border-zinc-500 rounded-full absolute top-1/2 transform -translate-1/2 right-0 cursor-pointer">
-                <FontAwesomeIcon
-                  icon={faChevronDown}
-                  className="text-zinc-500"
-                />
-              </div>
-              {countryDropDown && (
-                <div className="absolute bg-white w-full top-[105%] border divide-zinc-600 h-25 overflow-auto">
-                  {countries.map((c) => (
-                    <div
-                      key={c}
-                      className="p-2 hover:bg-zinc-200 cursor-pointer"
-                      onClick={() => {
-                        setCountryDropDown(false);
-                        setForm({ ...form, pays: c });
-                      }}
-                    >
-                      {c}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+
+            {/* Dropdown: Pays */}
+            <DropdownField
+              icon="/globe_uk.png"
+              label="Pays"
+              formKey="pays"
+              dropdownKey="country"
+              options={countries}
+              selectedValue={form.pays}
+              onSelect={handleDropdownSelect}
+              dropdownStates={dropdownStates}
+              setDropdownStates={setDropdownStates}
+            />
+            
+            {/* Input: Etablissement */}
             <div className="border-b-2 flex items-center">
               <img src="/cottage.png" alt="" />
               <input
@@ -320,6 +255,8 @@ const Register = () => {
                 }
               />
             </div>
+
+            {/* Input: Antecedents */}
             <div className="border-b-2 flex items-center md:col-span-2">
               <img src="/background_replace.png" alt="" />
               <input
@@ -333,9 +270,10 @@ const Register = () => {
               />
             </div>
           </div>
+          
           <button
             className="bg-[#004C91] flex items-center gap-5 py-2 px-6 rounded-full mt-4 cursor-pointer"
-            onClick={handleRegister}
+            type="submit"
           >
             <span className="text-xl text-white">Register</span>
             <div className="size-7 bg-[#8c98ff] flex justify-center items-center rounded-full">
@@ -345,7 +283,8 @@ const Register = () => {
         </form>
       </div>
       <div className="relative col-span-12 lg:col-span-7 w-full h-screen overflow-hidden hidden lg:block">
-        <div className="absolute top-1/2 left-1/2 transform -translate-1/2 z-12 bg-white p-5 rounded-lg shadow-xl border border-zinc-200">
+        {/* Background/Visuals remain the same */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-12 bg-white p-5 rounded-lg shadow-xl border border-zinc-200">
           <img src="/logo_transparent.png" alt="" className="w-50" />
         </div>
         <div className="bg-[#143A63] w-125 h-75 absolute rounded-bl-4xl right-30 -top-50 transform -rotate-25 z-10"></div>

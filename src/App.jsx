@@ -33,48 +33,59 @@ import JuryStats from "./pages/jury/JuryStats";
 import JuryCandidatures from "./pages/jury/JuryCandidatures";
 import Evaluation from "./pages/jury/Evaluation";
 import Phases from "./pages/admin/Phases";
+import Messages from "./pages/admin/Messages";
+import MessageDetails from "./pages/admin/MessageDetails";
+import Profile from "./pages/candidate/Profile";
+import Contact from "./pages/Contact";
 
 const App = () => {
   return (
     <>
-    <ToastContainer/>
+      <ToastContainer />
       <Routes>
         <Route element={<MainLayout />}>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/vote" element={<Vote/>}/>
-          <Route path="/vote/:id" element={<CandidatureDetails/>}/>
-          <Route path="/resultats" element={<Resultats/>}/>
-          <Route path="/gallerie" element={<Gallery/>}/>
-          <Route path="/news/:id" element={<NewsDetails/>}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/vote" element={<Vote />} />
+          <Route path="/vote/:id" element={<CandidatureDetails />} />
+          <Route path="/resultats" element={<Resultats />} />
+          <Route path="/gallerie" element={<Gallery />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/news/:id" element={<NewsDetails />} />
         </Route>
         <Route element={<AuthLayout />}>
-          <Route path="/register" element={<Register />}/>
-          <Route path="/login" element={<Login />}/>
-          <Route path="/login/forgot-password" element={<ForgotPassword />}/>
-          <Route path="/login/reset-password" element={<ResetPassword />}/>
-          <Route path="/participation" element={<Participation />}/>
-          <Route path="/vote/confirm/:token" element={<ConfirmVote/>}/>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/login/forgot-password" element={<ForgotPassword />} />
+          <Route path="/login/reset-password" element={<ResetPassword />} />
+          <Route path="/participation" element={<Participation />} />
+          <Route path="/vote/confirm/:token" element={<ConfirmVote />} />
         </Route>
         <Route path="/admin" element={<AdminLayout />}>
-          <Route path="/admin/stats" element={<Stats />}/>
-          <Route path="/admin/editions" element={<Editions />}/>
-          <Route path="/admin/jury" element={<Jury />}/>
-          <Route path="/admin/candidatures" element={<Candidatures />}/>
-          <Route path="/admin/gallerie" element={<GalleryPanel />}/>
-          <Route path="/admin/gallerie/:id" element={<EditionGallery />}/>
-          <Route path="/admin/news" element={<News />}/>
-          <Route path="/admin/votes" element={<Votes />}/>
-          <Route path="/admin/evaluations" element={<Evaluations />}/>
-          <Route path="/admin/results" element={<ResultatsAdmin />}/>
-          <Route path="/admin/partners" element={<Partners />}/>
-          <Route path="/admin/phases" element={<Phases />}/>
+          <Route path="/admin/stats" element={<Stats />} />
+          <Route path="/admin/editions" element={<Editions />} />
+          <Route path="/admin/jury" element={<Jury />} />
+          <Route path="/admin/candidatures" element={<Candidatures />} />
+          <Route path="/admin/gallerie" element={<GalleryPanel />} />
+          <Route path="/admin/gallerie/:id" element={<EditionGallery />} />
+          <Route path="/admin/news" element={<News />} />
+          <Route path="/admin/votes" element={<Votes />} />
+          <Route path="/admin/evaluations" element={<Evaluations />} />
+          <Route path="/admin/results" element={<ResultatsAdmin />} />
+          <Route path="/admin/partners" element={<Partners />} />
+          <Route path="/admin/phases" element={<Phases />} />
+          <Route path="/admin/messages" element={<Messages />} />
+          <Route path="/admin/messages/:id" element={<MessageDetails />} />
+          {/* <Route path="/admin/messages" element={<MessageLayout />}>
+            <Route path="/admin/messages/:id" element={<MessageDetails />}/>
+          </Route> */}
         </Route>
         <Route path="/jury" element={<JuryLayout />}>
-          <Route path="/jury/stats" element={<JuryStats />}/>
-          <Route path="/jury/evaluations" element={<JuryCandidatures />}/>
-          <Route path="/jury/evaluations/:id" element={<Evaluation />}/>
-          <Route path="/jury/profile"/>
+          <Route path="/jury/stats" element={<JuryStats />} />
+          <Route path="/jury/evaluations" element={<JuryCandidatures />} />
+          <Route path="/jury/evaluations/:id" element={<Evaluation />} />
+          <Route path="/jury/profile" />
         </Route>
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </>
   );

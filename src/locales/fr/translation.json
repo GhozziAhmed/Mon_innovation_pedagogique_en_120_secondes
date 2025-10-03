@@ -1,0 +1,74 @@
+{
+  "hero": {
+    "title": {
+      "part1": "Mon",
+      "part2": "Pédagogique",
+      "part3": "Innovation",
+      "part4": "En",
+      "part5": "120 Secondes"
+    },
+    "description": "Un concours international pour les enseignants francophones pour présenter une vidéo de 2 minutes présentant leur idée pédagogique la plus innovante",
+    "buttons": {
+      "participate": "Participer",
+      "vote": "Voter"
+    }
+  },
+  "navbar": {
+    "home": "Accueil",
+    "vote": "Vote",
+    "results": "Résultats",
+    "gallery": "Galerie",
+    "contact": "Contact",
+    "auth": {
+      "register": "S'inscrire",
+      "login": "Connexion",
+      "logout": "Déconnexion"
+    },
+    "user_links": {
+      "candidate": "Mes Candidatures",
+      "jury": "Mes Évaluations",
+      "admin": "Panneau Admin"
+    }
+  },
+  "flow": {
+    "title": "Comment Participer",
+    "steps": {
+      "step1": {
+        "heading": "Inscription & Soumission",
+        "description": "Remplissez notre formulaire en ligne"
+      },
+      "step2": {
+        "heading": "Évaluation",
+        "description": "Un jury indépendant sélectionne les lauréats"
+      },
+      "step3": {
+        "heading": "Qualification",
+        "description": "Se qualifier pour la finale au Cameroun"
+      }
+    }
+  },
+  "news": {
+    "heading": "Actualités",
+    "readMore": "Voir Plus"
+  },
+  "vote": {
+    "heading": "BIENVENUE, VOTEZ POUR VOTRE MEILLEUR CANDIDAT",
+    "searchPlaceholder": "Chercher Un Candidat",
+    "filter": "Filtrer",
+    "filters": {
+      "az": "A-Z",
+      "za": "Z-A"
+    },
+    "readMore": "Plus",
+    "noCandidates": "Aucun candidat trouvé.",
+    "unsupportedPage": {
+      "heading": "Page Non Valable",
+      "message": "Le vote public est terminé."
+    },
+    "comingSoon": {
+      "heading": "Bientôt Disponible",
+      "message": "Le concours est encore en phase de '{{phase}}'.",
+      "pausedMessage": "Le concours n'a pas encore commencé ou en pause."
+    }
+  }
+}

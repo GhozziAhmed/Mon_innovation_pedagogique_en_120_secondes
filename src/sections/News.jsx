@@ -3,35 +3,55 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
+import NewsCardSkeleton from '../components/NewsCardSkeleton'; // Import the skeleton component
 
 const News = () => {
+  const { t } = useTranslation();
   const [news, setNews] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    axios
-      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/news")
-      .then((res) => {
-        console.log(res.data);
-        setNews(res.data.slice(0, 3));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // Add a small delay to better showcase the skeleton loader
+    setTimeout(() => {
+      axios
+        .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/news")
+        .then((res) => {
+          setNews(res.data.slice(0, 3));
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }, 1500); // Simulate a network delay of 1.5 seconds
   }, []);
+
   return (
     <div className="bg-[#454545] py-10 relative">
       <div className="w-full mb-15">
         <div className="bg-[#FCA413] py-3 px-15 rounded-tr-xl rounded-br-xl w-fit">
-          <h1 className="text-4xl text-white">Actualités</h1>
+          <h1 className="text-4xl text-white">
+            {t("news.heading")}
+          </h1>
         </div>
       </div>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-8 md:px-10 lg:px-20 w-full">
-        {news &&
+        {isLoading ? (
+          <>
+            {/* Render 3 skeleton cards while loading */}
+            <NewsCardSkeleton />
+            <NewsCardSkeleton />
+            <NewsCardSkeleton />
+          </>
+        ) : news.length > 0 ? (
           news.map((n) => (
             <div
               key={n.news_id}
               className="bg-white w-80 rounded overflow-hidden max-w-full mx-auto"
             >
-              {/* <div className="size-20 bg-[#FCA413] transform rotate-45"></div> */}
               <div className="w-full">
                 <img src={n.image_url} alt="" />
               </div>
@@ -49,7 +69,7 @@ const News = () => {
                   to={`/news/${n.news_id}`}
                   className="text-[#004C91] flex items-center gap-1 group"
                 >
-                  Voir Plus{" "}
+                  {t("news.readMore")}{" "}
                   <FontAwesomeIcon
                     icon={faArrowRight}
                     className="transform transition-transform duration-300 group-hover:translate-x-2"
@@ -57,7 +77,12 @@ const News = () => {
                 </Link>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <div className="col-span-full text-center text-white text-xl">
+            No news articles found.
+          </div>
+        )}
       </div>
     </div>
   );

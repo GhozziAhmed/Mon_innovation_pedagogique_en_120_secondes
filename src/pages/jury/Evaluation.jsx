@@ -149,7 +149,7 @@ const Evaluation = () => {
         </div>
         <div className="col-span-4 xl:col-span-1 p-5 rounded border border-zinc-200 h-fit">
           <h2 className="text-2xl font-semibold text-zinc-800">Evaluation</h2>
-          <form action="" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-2 mt-5">
               <div className="flex justify-between">
                 <span>Innovation</span>
@@ -231,7 +231,8 @@ const Evaluation = () => {
             </div>
             <div className="flex justify-end mt-5">
               <button
-                className="bg-[#004C91] text-white px-4 py-2 rounded cursor-pointer disabled:bg-[#004C91]/50"
+                className="bg-[#004C91] text-white px-4 py-2 rounded cursor-pointer disabled:opacity-50 disabled:cursor-default"
+                type="submit"
                 disabled={loading}
               >
                 {loading ? "Soumission..." : "Soumettre"}

@@ -1,10 +1,7 @@
-import {
-  faChevronDown,
-  faFilter,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
 const JuryCandidatures = () => {
@@ -62,39 +59,63 @@ const JuryCandidatures = () => {
 
     setFilteredCandidatures(finalResults);
   }, [filter]);
+  const filterDropdownRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        filterDropdownRef.current &&
+        !filterDropdownRef.current.contains(event.target)
+      ) {
+        setFilterDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <div className="px-4 md:px-6 lg:px-20 py-10">
       <div className="text-4xl w-fit mx-auto mb-10">
         <h1>Evaluer Votre Candidatures</h1>
       </div>
-      <div className="flex flex-col gap-5 md:gap-0 md:flex-row md:justify-between mt-10">
-        <div className="flex w-full items-stretch">
+      <div className="flex flex-col md:flex-row md:justify-between items-center gap-4 mb-10">
+        <div className="flex w-full md:w-1/2">
           <input
             type="text"
-            className="border-3 border-r-0 w-full md:w-1/2 px-4 py-2 focus:outline-0"
-            placeholder="Cherchez Un Candidat"
+            className="w-full px-4 py-2 border-2 border-gray-300 border-r-0 rounded-l-lg focus:outline-none focus:border-[#004c91] transition-all"
+            // placeholder={t("vote.searchPlaceholder")}
+            placeholder="Chercher Un Candidat"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            onFocus={() => setFilterDropdown(false)}
           />
-          <button className="bg-black text-white px-4 border-3 border-black">
+          <div className="bg-[#004c91] text-white px-4 py-2 flex items-center rounded-r-lg">
             <FontAwesomeIcon icon={faFilter} />
-          </button>
+          </div>
         </div>
 
         <div
-          className="w-full py-2 md:py-0 md:w-50 relative flex justify-between items-center px-2 border gap-5 cursor-pointer"
+          className="w-full md:w-auto relative cursor-pointer"
           onClick={() => setFilterDropdown(!filterDropdown)}
+          ref={filterDropdownRef}
         >
-          {filter}
-          <FontAwesomeIcon icon={faChevronDown} />
+          <div className="flex justify-between items-center px-4 py-2 border-2 border-gray-300 rounded-lg bg-white hover:border-[#004c91] transition-colors">
+            <span>{filter}</span>
+            <FontAwesomeIcon
+              icon={faChevronDown}
+              className={`ml-2 transition-transform duration-300 ${
+                filterDropdown ? "rotate-180" : ""
+              }`}
+            />
+          </div>
           {filterDropdown && (
-            <div className="absolute bg-white top-full outline w-full z-10 left-0">
+            <div className="absolute top-full mt-2 w-fit bg-white rounded-lg shadow-lg z-10 border border-gray-200 overflow-hidden animate-slide-down">
               {filters.map((f) => (
                 <div
                   key={f}
-                  className="p-2 cursor-pointer hover:bg-zinc-200"
-                  onClick={() => {
+                  className="p-3 hover:bg-gray-100 transition-colors whitespace-nowrap"
+                  onClick={(e) => {
+                    e.stopPropagation();
                     setFilter(f);
                     setFilterDropdown(false);
                   }}
@@ -111,7 +132,7 @@ const JuryCandidatures = () => {
           filteredCandidatures.map((c) => (
             <div
               key={c.assignment_id}
-              className="rounded overflow-hidden shadow relative border border-zinc-300"
+              className="rounded-lg overflow-hidden shadow relative border border-zinc-300"
             >
               <img src="/vote.png" alt="" />
               <div className="px-3 py-5">
@@ -121,18 +142,20 @@ const JuryCandidatures = () => {
                   </h2>
                   <Link
                     to={`/jury/evaluations/${c.candidature_id}`}
-                    className="border-2 border-zinc-800 text-zinc-800 rounded px-4 py-1 cursor-pointer"
+                    className="border-2 border-zinc-600 text-zinc-600 hover:bg-zinc-100 rounded px-4 py-1 cursor-pointer"
                   >
                     Plus
                   </Link>
                 </div>
               </div>
               <div className="absolute top-2 right-2">
-                <img
-                  src={c.evaluated ? "/check-circle.png" : "/push-pin.png"}
-                  alt=""
-                  className="w-5"
-                />
+                <div className="size-8 rounded-full bg-white flex justify-center items-center">
+                  <img
+                    src={c.evaluated ? "/check-circle.png" : "/push-pin.png"}
+                    alt=""
+                    className="w-5"
+                  />
+                </div>
               </div>
             </div>
           ))}

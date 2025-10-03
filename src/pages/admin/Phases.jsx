@@ -1,5 +1,4 @@
 import {
-  faEllipsisVertical,
   faRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -73,7 +72,7 @@ const Phases = () => {
           Initialiser
         </button>
       </div>
-      <div className="mt-20">
+      <div className="mt-20 pb-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {phases &&
             phases.map((p, i) => (

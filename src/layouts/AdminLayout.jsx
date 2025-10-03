@@ -72,13 +72,9 @@ const AdminLayout = () => {
             </p>
           </div>
         </div>
-        <div className="mt-5 shadow py-10 px-4 md:px-6 lg:px-20 border-t border-zinc-200">
+        <div className="mt-5 shadow py-10 px-4 md:px-6 lg:px-20 border-t border-zinc-200 overflow-auto custom-scrollbar">
           <div
-            className="flex gap-5 overflow-auto scrollbar-hide"
-            style={{
-              msOverflowStyle: "none", // IE and old Edge
-              scrollbarWidth: "none", // Firefox
-            }}
+            className="flex gap-5"
           >
             <NavLink
               to="/admin/stats"
@@ -211,6 +207,18 @@ const AdminLayout = () => {
               }
             >
               Phases
+            </NavLink>
+            <NavLink
+              to="/admin/messages"
+              className={({ isActive }) =>
+                `flex-1 flex justify-center rounded shadow-md py-2 px-4 ${
+                  isActive
+                    ? "bg-[#004C91] text-white"
+                    : "bg-zinc-200 text-zinc-700"
+                }`
+              }
+            >
+              Messages
             </NavLink>
           </div>
         </div>

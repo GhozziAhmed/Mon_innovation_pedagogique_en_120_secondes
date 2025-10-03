@@ -1,0 +1,74 @@
+{
+  "hero": {
+    "title": {
+      "part1": "My",
+      "part2": "Innovation",
+      "part3": "Pedagogical",
+      "part4": "In",
+      "part5": "120 Seconds"
+    },
+    "description": "An international competition for French-speaking teachers to present a 2-minute video showcasing their most innovative pedagogical idea.",
+    "buttons": {
+      "participate": "Participate",
+      "vote": "Vote"
+    }
+  },
+  "navbar": {
+    "home": "Home",
+    "vote": "Vote",
+    "results": "Results",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "auth": {
+      "register": "Register",
+      "login": "Login",
+      "logout": "Logout"
+    },
+    "user_links": {
+      "candidate": "My Submissions",
+      "jury": "My Evaluations",
+      "admin": "Admin Panel"
+    }
+  },
+  "flow": {
+    "title": "How to Participate",
+    "steps": {
+      "step1": {
+        "heading": "Registration & Submission",
+        "description": "Fill out our online form"
+      },
+      "step2": {
+        "heading": "Evaluation",
+        "description": "An independent jury selects the winners"
+      },
+      "step3": {
+        "heading": "Qualification",
+        "description": "Qualify for the finals in Cameroon"
+      }
+    }
+  },
+  "news": {
+    "heading": "News",
+    "readMore": "Read More"
+  },
+  "vote": {
+    "heading": "WELCOME, VOTE FOR YOUR BEST CANDIDATE",
+    "searchPlaceholder": "Search for a Candidate",
+    "filter": "Filter",
+    "filters": {
+      "az": "A-Z",
+      "za": "Z-A"
+    },
+    "readMore": "More",
+    "noCandidates": "No candidates found.",
+    "unsupportedPage": {
+      "heading": "Page Not Available",
+      "message": "Public voting is over."
+    },
+    "comingSoon": {
+      "heading": "Coming Soon",
+      "message": "The competition is still in the '{{phase}}' phase.",
+      "pausedMessage": "The competition has not started or is on pause."
+    }
+  }
+}

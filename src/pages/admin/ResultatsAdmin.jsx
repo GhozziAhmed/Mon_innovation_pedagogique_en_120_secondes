@@ -47,9 +47,9 @@ const ResultatsAdmin = () => {
             className="border-3 border-r-0 w-full md:w-1/2 px-4 py-2 focus:outline-0"
             placeholder="Cherchez Un Candidat"
           />
-          <button className="bg-black text-white px-4 border-3 border-black cursor-pointer">
+          <div className="bg-black text-white px-4 border-3 border-black flex items-center">
             <FontAwesomeIcon icon={faFilter} />
-          </button>
+          </div>
         </div>
 
         <div

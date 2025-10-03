@@ -22,10 +22,12 @@ const Partners = () => {
   useEffect(() => {
     fetchData();
   }, []);
+  
   const [modalLoading, setModalLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState("");
   const [selectedData, setSelectedData] = useState(null);
+  
   const onSave = (form) => {
     setModalLoading(true);
     if (modalMode === "add") {
@@ -50,7 +52,7 @@ const Partners = () => {
         .catch((err) => {
           setModalLoading(false);
           console.log(err);
-          toast.error(err.response.data.error, {
+          toast.error(err.response?.data?.error || "Une erreur est survenue.", {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
@@ -83,7 +85,7 @@ const Partners = () => {
         .catch((err) => {
           setModalLoading(false);
           console.log(err);
-          toast.error(err.response.data.error, {
+          toast.error(err.response?.data?.error || "Une erreur est survenue.", {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
@@ -92,16 +94,18 @@ const Partners = () => {
         });
     }
   };
+  
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [partnerId, setPartnerId] = useState(0);
+  
   const handleDelete = () => {
     setModalLoading(true);
     axios
       .delete(
         `https://mon-innovation-pedagogique-en-120.onrender.com/api/partners/${partnerId}`,{
-            headers : {
-                Authorization : `Bearer ${localStorage.getItem("token")}`,
-            }
+          headers : {
+              Authorization : `Bearer ${localStorage.getItem("token")}`,
+          }
         }
       )
       .then((res) => {
@@ -118,7 +122,7 @@ const Partners = () => {
       .catch((err) => {
         console.log(err);
         setModalLoading(false);
-        toast.error(err.response.data.error, {
+        toast.error(err.response?.data?.error || "Une erreur est survenue.", {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
@@ -126,19 +130,20 @@ const Partners = () => {
         });
       });
   };
+  
   return (
-    <div className="px-4 md:px-6 lg:px-20 py-10">
-      <div className="flex justify-between items-center mb-5">
-        <div className="space-y-2">
-          <h1 className="text-4xl text-zinc-800 font-semibold">
-            Gestion Les Partenaires
+    <div className="p-4 md:p-8 lg:p-12">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-8 gap-4 md:gap-0">
+        <div className="space-y-2 text-center md:text-left">
+          <h1 className="text-3xl md:text-4xl text-zinc-800 font-semibold">
+            Gestion des Partenaires
           </h1>
-          <p className="text-zinc-800">
-            Ajouter, Modifier ou Supprimer un partenaire
+          <p className="text-zinc-600">
+            Ajouter, modifier ou supprimer un partenaire
           </p>
         </div>
         <button
-          className="bg-[#004C91] rounded px-4 py-2 text-white text-2xl cursor-pointer flex items-center gap-2"
+          className="bg-[#004C91] rounded-lg px-6 py-2.5 text-white font-semibold transition-colors hover:bg-[#003B70] flex items-center gap-2"
           onClick={() => {
             setModalOpen(true);
             setModalMode("add");
@@ -149,50 +154,68 @@ const Partners = () => {
           Ajouter
         </button>
       </div>
-      <div className="overflow-x-auto">
-        <table className="min-w-full border-collapse shadow">
+      
+      <div className="overflow-x-auto rounded-lg shadow-md">
+        <table className="min-w-full">
           <thead>
-            <tr className="border-b text-zinc-700">
-              <th className="p-3 text-left">Nom</th>
-              <th className="p-3 text-left">Logo</th>
-              <th className="p-3 text-left">Actions</th>
+            <tr className="bg-zinc-100 border-b border-zinc-200 text-zinc-700">
+              <th className="p-4 text-left font-semibold">Nom</th>
+              <th className="p-4 text-left font-semibold">Logo</th>
+              <th className="p-4 text-left font-semibold">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {partners.map((p) => (
-              <tr key={p.partenaire_id} className="border-b border-zinc-400">
-                <td className="p-3">{p.nom}</td>
-                <td className="p-3">
-                  <img src={p.logo} alt="" className="w-20" />
-                </td>
-                <td className="p-3">
-                  <div className="flex gap-5">
-                    <button
-                      className="px-4 py-2 bg-[#004C91] text-white rounded cursor-pointer"
-                      onClick={() => {
-                        setModalOpen(true);
-                        setModalMode("edit");
-                        setSelectedData({ ...p, image: null });
-                      }}
-                    >
-                      Modifier
-                    </button>
-                    <button
-                      className="px-4 py-2 bg-red-500 text-white rounded cursor-pointer"
-                      onClick={() => {
-                        setDeleteModalOpen(true);
-                        setPartnerId(p.partenaire_id);
-                      }}
-                    >
-                      Supprimer
-                    </button>
-                  </div>
+            {partners.length > 0 ? (
+              partners.map((p) => (
+                <tr
+                  key={p.partenaire_id}
+                  className="border-b border-zinc-200 last:border-0 hover:bg-zinc-50 transition-colors"
+                >
+                  <td className="p-4 text-zinc-700 font-medium">{p.nom}</td>
+                  <td className="p-4">
+                    <img
+                      src={p.logo}
+                      alt={p.nom}
+                      className="w-24 h-16 object-contain rounded-md p-1 bg-white"
+                    />
+                  </td>
+                  <td className="p-4">
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <button
+                        className="rounded-lg py-2 px-4 text-white cursor-pointer bg-[#004C91] font-medium transition-colors hover:bg-[#003B70]"
+                        onClick={() => {
+                          setModalOpen(true);
+                          setModalMode("edit");
+                          // Note: Assuming 'logo' is not needed in the initial form, similar to 'image' in the News component
+                          setSelectedData({ ...p, logo: null }); 
+                        }}
+                      >
+                        Modifier
+                      </button>
+                      <button
+                        className="rounded-lg py-2 px-4 text-white cursor-pointer bg-red-600 font-medium transition-colors hover:bg-red-700"
+                        onClick={() => {
+                          setDeleteModalOpen(true);
+                          setPartnerId(p.partenaire_id);
+                        }}
+                      >
+                        Supprimer
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3" className="p-4 text-center text-zinc-500">
+                  Aucun partenaire trouvé.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
+      
       {modalOpen && (
         <PartnerModal
           mode={modalMode}

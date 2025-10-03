@@ -161,9 +161,9 @@ const EditionGallery = () => {
                 />
               </div>
               <div className="p-3 flex justify-center">
-                <div className="flex space-x-2">
+                <div className="flex space-x-2 w-full">
                   <button
-                    className="py-1 px-3 border rounded text-white bg-[#004C91] cursor-pointer"
+                    className="py-1 px-3 border rounded text-white bg-[#004C91] cursor-pointer w-1/2"
                     onClick={() => {
                       setModalOpen(true);
                       setModalMode("edit");
@@ -173,7 +173,7 @@ const EditionGallery = () => {
                     Modifiez
                   </button>
                   <button
-                    className="py-1 px-3 border rounded text-white bg-red-500 cursor-pointer"
+                    className="py-1 px-3 border rounded text-white bg-red-500 cursor-pointer w-1/2"
                     onClick={() => {
                       setActionOpen(true);
                       setImageId(p.image_id);
