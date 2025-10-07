@@ -14,6 +14,8 @@ const PartnerModal = ({ mode, onClose, onSave, data, loading }) => {
     }
   );
 
+  const isValidForm = () => form.nom && form.type && (form.image || form.logo)
+
   // Correctly initialize `logo` for edit mode if `data.logo` exists
   useEffect(() => {
     if (mode === 'edit' && data && data.logo) {
@@ -166,7 +168,7 @@ const PartnerModal = ({ mode, onClose, onSave, data, loading }) => {
               className={`py-3 rounded-lg font-semibold text-white cursor-pointer w-full transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
                 mode === "add" ? "bg-[#004C91] hover:bg-[#003B70]" : "bg-green-600 hover:bg-green-700"
               }`}
-              disabled={loading}
+              disabled={loading || !isValidForm()}
             >
               {loading ? "Chargement..." : mode === "add" ? "Ajouter" : "Modifier"}
             </button>

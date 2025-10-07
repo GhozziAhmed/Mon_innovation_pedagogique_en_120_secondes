@@ -17,6 +17,7 @@ const JuryModal = ({ mode, onClose, data, onSave, loading }) => {
           pays: "",
         }
   );
+  const isValidForm = () => form.nom && form.prenom && form.contact && form.mot_de_passe && form.edition_id && form.pays
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black/50">
       <div className="bg-white rounded p-5 flex flex-col gap-5 max-w-full items-stretch">
@@ -84,7 +85,7 @@ const JuryModal = ({ mode, onClose, data, onSave, loading }) => {
           />
         </div>
         <div className="flex space-x-5 text-xl">
-          <button onClick={() => onSave(form)} disabled={loading} className={`w-1/2 border text-white rounded-lg py-2 cursor-pointer disabled:opacity-50 disabled:cursor-default hover:opacity-90 ${mode === "edit" ? "border-green-500 bg-green-500" : "border-[#004C91] bg-[#004C91]"}`} type="submit">
+          <button onClick={() => onSave(form)} disabled={loading || !isValidForm()} className={`w-1/2 border text-white rounded-lg py-2 cursor-pointer disabled:opacity-50 disabled:cursor-default hover:opacity-90 ${mode === "edit" ? "border-green-500 bg-green-500" : "border-[#004C91] bg-[#004C91]"}`} type="submit">
             {loading
               ? "Chargement..."
               : mode === "add"

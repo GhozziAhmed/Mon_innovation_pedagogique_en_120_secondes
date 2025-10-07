@@ -46,7 +46,7 @@ const Partners = () => {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
-            closeButton: false,
+            closeButton: true,
           });
         })
         .catch((err) => {
@@ -56,7 +56,7 @@ const Partners = () => {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
-            closeButton: false,
+            closeButton: true,
           });
         });
     } else {
@@ -79,7 +79,7 @@ const Partners = () => {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
-            closeButton: false,
+            closeButton: true,
           });
         })
         .catch((err) => {
@@ -89,7 +89,7 @@ const Partners = () => {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
-            closeButton: false,
+            closeButton: true,
           });
         });
     }
@@ -116,7 +116,7 @@ const Partners = () => {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       })
       .catch((err) => {
@@ -126,7 +126,7 @@ const Partners = () => {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       });
   };

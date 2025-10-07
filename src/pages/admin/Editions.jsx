@@ -4,6 +4,7 @@ import {
   faTrashCan,
   faPenToSquare,
   faBoxArchive,
+  faCalendarCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -23,19 +24,18 @@ const Editions = () => {
 
   const fetchEditions = async () => {
     try {
-      const res = await axios.get("https://mon-innovation-pedagogique-en-120.onrender.com/api/editions");
+      const res = await axios.get(
+        "https://mon-innovation-pedagogique-en-120.onrender.com/api/editions"
+      );
       setEditions(res.data);
     } catch (err) {
       console.error("Erreur lors de la récupération des éditions:", err);
-      toast.error(
-        "Échec de la récupération des éditions.",
-        {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeButton: false,
-        }
-      );
+      toast.error("Échec de la récupération des éditions.", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeButton: true,
+      });
     }
   };
 
@@ -51,43 +51,48 @@ const Editions = () => {
     setLoading(true);
     try {
       if (modalMode === "add") {
-        await axios.post("https://mon-innovation-pedagogique-en-120.onrender.com/api/editions", form, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        await axios.post(
+          "https://mon-innovation-pedagogique-en-120.onrender.com/api/editions",
+          form,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         toast.success("Édition ajoutée avec succès !", {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       } else {
-        await axios.put("https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/edit", form, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        await axios.put(
+          "https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/edit",
+          form,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         toast.success("Édition modifiée avec succès !", {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       }
       setModalOpen(false);
       fetchEditions();
     } catch (err) {
       console.error(err);
-      toast.error(
-        err.response?.data?.error || "Une erreur est survenue.",
-        {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeButton: false,
-        }
-      );
+      toast.error(err.response?.data?.error || "Une erreur est survenue.", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeButton: true,
+      });
     } finally {
       setLoading(false);
     }
@@ -108,20 +113,17 @@ const Editions = () => {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
-        closeButton: false,
+        closeButton: true,
       });
       fetchEditions();
     } catch (err) {
       console.error(err);
-      toast.error(
-        err.response?.data?.error || "Une erreur est survenue.",
-        {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeButton: false,
-        }
-      );
+      toast.error(err.response?.data?.error || "Une erreur est survenue.", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeButton: true,
+      });
     } finally {
       setLoading(false);
       setActionOpen(false);
@@ -144,23 +146,93 @@ const Editions = () => {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
-        closeButton: false,
+        closeButton: true,
       });
       fetchEditions();
     } catch (err) {
       console.error(err);
-      toast.error(
-        err.response?.data?.error || "Une erreur est survenue.",
-        {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeButton: false,
-        }
-      );
+      toast.error(err.response?.data?.error || "Une erreur est survenue.", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeButton: true,
+      });
     } finally {
       setLoading(false);
       setActionOpen(false);
+    }
+  };
+  // set all phases of the archived edition to pending
+  const reset = () => {
+    axios
+      .put(
+        "https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/reset",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data.message);
+        fetchEditions();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Internal server error", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeButton: true,
+        });
+      });
+  };
+
+  const updatePhasesEdition = (id) => {
+    axios.put(
+      `https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    ).then((res) => {
+      console.log(res.data);
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+
+  const handleActive = async (id) => {
+    try {
+      const res = await axios.put(
+        `https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/${id}/activate`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      toast.success(res.data.message, {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeButton: true,
+      });
+      reset();
+      updatePhasesEdition(id);
+      fetchEditions();
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response?.data?.error || "Une erreur est survenue.", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeButton: true,
+      });
     }
   };
 
@@ -256,14 +328,26 @@ const Editions = () => {
                           <FontAwesomeIcon icon={faTrashCan} />
                         </button>
                         <button
-                          className="text-zinc-500 hover:text-orange-600 transition-colors cursor-pointer"
+                          className={`text-zinc-500 ${
+                            e.is_active === 1
+                              ? "hover:text-orange-600"
+                              : "hover:text-green-500"
+                          } transition-colors cursor-pointer`}
                           onClick={() => {
-                            setActionOpen(true);
-                            setActionMode("archivez");
-                            setModalId(e.edition_id);
+                            if (e.is_active === 1) {
+                              setActionOpen(true);
+                              setActionMode("archivez");
+                              setModalId(e.edition_id);
+                            } else {
+                              handleActive(e.edition_id);
+                            }
                           }}
                         >
-                          <FontAwesomeIcon icon={faBoxArchive} />
+                          {e.is_active === 1 ? (
+                            <FontAwesomeIcon icon={faBoxArchive} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCalendarCheck} />
+                          )}
                         </button>
                       </div>
                     </td>

@@ -34,7 +34,7 @@ const Contact = () => {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
-        closeButton: false,
+        closeButton: true,
       });
       return;
     }
@@ -55,7 +55,7 @@ const Contact = () => {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
-        closeButton: false,
+        closeButton: true,
       });
       setForm({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
@@ -65,7 +65,7 @@ const Contact = () => {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
-        closeButton: false,
+        closeButton: true,
       });
     } finally {
       setSubmitting(false);

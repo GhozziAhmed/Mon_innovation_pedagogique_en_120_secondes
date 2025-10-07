@@ -64,7 +64,7 @@ const Evaluation = () => {
           position: "bottom-right",
           autoClose: 2000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       })
       .catch((err) => {
@@ -74,7 +74,7 @@ const Evaluation = () => {
           position: "bottom-right",
           autoClose: 2000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       });
   };

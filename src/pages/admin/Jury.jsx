@@ -67,7 +67,7 @@ const Jury = () => {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
-        closeButton: false,
+        closeButton: true,
       });
     } catch (err) {
       setLoading(false);
@@ -76,7 +76,7 @@ const Jury = () => {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
-        closeButton: false,
+        closeButton: true,
       });
     }
   };
@@ -101,7 +101,7 @@ const Jury = () => {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       }
       if (juryModalMode === "edit") {
@@ -121,7 +121,7 @@ const Jury = () => {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       }
     } catch (err) {
@@ -131,7 +131,7 @@ const Jury = () => {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
-        closeButton: false,
+        closeButton: true,
       });
     }
   };
@@ -153,14 +153,14 @@ const Jury = () => {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
-        closeButton: false,
+        closeButton: true,
       });
     } catch (err) {
       toast.error(err.response?.data?.error || "Une erreur est survenue.", {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
-        closeButton: false,
+        closeButton: true,
       });
     }
   };

@@ -13,6 +13,8 @@ const ImageModal = ({ onClose, mode, data, onSave, loading }) => {
     data || { titre: "", description: "", image: null, image_url: null, edition_id: id }
   );
 
+  const isValidForm = () => form.titre && form.description && (form.image || form.image_url);
+
   useEffect(() => {
     // If we're in edit mode and data has an existing image URL, store it.
     if (mode === "edit" && data?.image_url) {
@@ -127,7 +129,7 @@ const ImageModal = ({ onClose, mode, data, onSave, loading }) => {
             className={`w-full py-3 rounded-lg font-semibold text-white transition-colors duration-200 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed ${
               mode === "add" ? "bg-[#004C91] hover:bg-[#003B70]" : "bg-green-600 hover:bg-green-700"
             }`} 
-            disabled={loading}
+            disabled={loading || !isValidForm()}
           >
             {loading ? "Chargement..." : mode === "add" ? "Ajouter" : "Sauvegarder"}
           </button>

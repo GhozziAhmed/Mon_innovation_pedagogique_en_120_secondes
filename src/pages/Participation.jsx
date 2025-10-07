@@ -28,7 +28,7 @@ const Participation = () => {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
         setForm({
           titre: "",
@@ -43,7 +43,7 @@ const Participation = () => {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       });
   };

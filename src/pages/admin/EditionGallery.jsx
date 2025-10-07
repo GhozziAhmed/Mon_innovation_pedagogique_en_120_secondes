@@ -44,7 +44,7 @@ const EditionGallery = () => {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
-            closeButton: false,
+            closeButton: true,
           });
         })
         .catch((err) => {
@@ -54,7 +54,7 @@ const EditionGallery = () => {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
-            closeButton: false,
+            closeButton: true,
           });
         });
     } else {
@@ -73,7 +73,7 @@ const EditionGallery = () => {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
-            closeButton: false,
+            closeButton: true,
           });
         })
         .catch((err) => {
@@ -83,7 +83,7 @@ const EditionGallery = () => {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
-            closeButton: false,
+            closeButton: true,
           });
         });
     }
@@ -105,7 +105,7 @@ const EditionGallery = () => {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       })
       .catch((err) => {

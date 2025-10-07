@@ -44,7 +44,7 @@ const Vote = () => {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       });
     axios

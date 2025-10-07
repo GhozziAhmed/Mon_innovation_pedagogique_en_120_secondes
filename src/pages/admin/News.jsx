@@ -47,7 +47,7 @@ const News = () => {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
-            closeButton: false,
+            closeButton: true,
           });
         })
         .catch((err) => {
@@ -56,7 +56,7 @@ const News = () => {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
-            closeButton: false,
+            closeButton: true,
           });
         });
     } else {
@@ -74,7 +74,7 @@ const News = () => {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
-            closeButton: false,
+            closeButton: true,
           });
         })
         .catch((err) => {
@@ -83,7 +83,7 @@ const News = () => {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
-            closeButton: false,
+            closeButton: true,
           });
         });
     }
@@ -105,7 +105,7 @@ const News = () => {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       })
       .catch((err) => {
@@ -115,7 +115,7 @@ const News = () => {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       });
   };

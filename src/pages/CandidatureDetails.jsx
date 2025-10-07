@@ -44,7 +44,7 @@ const CandidatureDetails = () => {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       });
   };
@@ -60,7 +60,7 @@ const CandidatureDetails = () => {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
         setConfirmation(false);
         setConfirmVoteModal(false);
@@ -72,7 +72,7 @@ const CandidatureDetails = () => {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
-          closeButton: false,
+          closeButton: true,
         });
       });
   };

@@ -29,7 +29,7 @@ const Phase = ({ phase, src, fetchData }) => {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
-        closeButton: false,
+        closeButton: true,
       });
       fetchData();
       setDropDown(false);
@@ -40,7 +40,7 @@ const Phase = ({ phase, src, fetchData }) => {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
-        closeButton: false,
+        closeButton: true,
       });
     }
   };

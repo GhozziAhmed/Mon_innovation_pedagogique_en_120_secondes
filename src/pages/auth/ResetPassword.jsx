@@ -33,7 +33,7 @@ const ResetPassword = () => {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: true,
-            closeButton: false,
+            closeButton: true,
           });
         } else {
           // Network error
@@ -41,7 +41,7 @@ const ResetPassword = () => {
             position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: true,
-            closeButton: false,
+            closeButton: true,
           });
         }
         setLoading(false);
