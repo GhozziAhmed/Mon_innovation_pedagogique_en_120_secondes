@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
-import Register from "./pages/Register";
+import Register from "./pages/auth/Register";
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
-import Login from "./pages/Login";
-import ForgotPassword from "./pages/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword";
+import Login from "./pages/auth/Login";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
 import Vote from "./pages/Vote";
 import CandidatureDetails from "./pages/CandidatureDetails";
 import ConfirmVote from "./pages/ConfirmVote";

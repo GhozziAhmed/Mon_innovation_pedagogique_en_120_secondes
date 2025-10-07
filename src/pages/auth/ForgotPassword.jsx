@@ -1,15 +1,22 @@
 import axios from "axios";
 import { useState } from "react";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const handleForgot = (e) => {
     e.preventDefault();
     setLoading(true);
     axios
-      .post("https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/forgot-password", { email })
+      .post(
+        "https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/forgot-password",
+        { email }
+      )
       .then((res) => {
         console.log(res);
         setEmail("");
@@ -33,7 +40,14 @@ const ForgotPassword = () => {
       });
   };
   return (
-    <div className="h-screen w-full flex justify-center items-center px-8">
+    <div className="h-screen w-full flex justify-center items-center px-8 relative">
+      <div
+        className="absolute top-5 left-5 text-[#004C91] text-xl cursor-pointer"
+        onClick={() => navigate(-1)}
+      >
+        <FontAwesomeIcon icon={faChevronLeft} />
+        Retourner
+      </div>
       <div className="border border-zinc-200 rounded shadow p-5 flex flex-col items-center bg-zinc-100 w-75 max-w-full">
         <img src="/logo_transparent.png" alt="" className="w-full mb-5" />
         <div className="w-full">

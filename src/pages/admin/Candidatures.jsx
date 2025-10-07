@@ -274,9 +274,9 @@ const Candidatures = () => {
                   <td className="p-4 text-zinc-700 font-medium whitespace-nowrap">
                     {c.nom} {c.prenom}
                   </td>
-                  <td className="p-4 text-zinc-700">{c.email}</td>
+                  <td className="p-4 text-zinc-700 whitespace-nowrap">{c.email}</td>
                   <td className="p-4 text-zinc-700">{c.pays}</td>
-                  <td className="p-4 text-zinc-700 whitespace-nowrap">{c.titre}</td>
+                  <td className="p-4 text-zinc-700">{c.titre}</td>
                   <td className="p-4">
                     <span
                       className={`py-1 px-3 rounded-full text-white text-sm capitalize font-semibold

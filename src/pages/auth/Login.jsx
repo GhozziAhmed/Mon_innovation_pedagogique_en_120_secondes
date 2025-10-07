@@ -12,8 +12,10 @@ const Login = () => {
   });
   const [error, setError] = useState("");
   const [hidden, setHidden] = useState(true);
+  const [loading, setLoading] = useState(false);
   const handleLogin = (e) => {
     e.preventDefault();
+    setLoading(true);
     axios
       .post("https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/login", login)
       .then((res) => {
@@ -22,10 +24,12 @@ const Login = () => {
         localStorage.setItem("user", JSON.stringify(res.data.user))
         setError("");
         navigate("/");
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err.response.data.error);
         setError(err.response.data.error);
+        setLoading(false);
       });
   };
   return (
@@ -87,13 +91,14 @@ const Login = () => {
             Mot de Passe oubliée ?
           </Link>
           <button
-            className="bg-[#004C91] flex items-center gap-5 py-2 px-6 rounded-full mt-5 cursor-pointer"
+            className="bg-[#004C91] flex items-center gap-5 py-2 px-6 rounded-full mt-5 cursor-pointer disabled:opacity-50"
             onClick={handleLogin}
+            disabled={loading}
           >
-            <span className="text-xl text-white">Login</span>
-            <div className="size-7 bg-[#8c98ff] flex justify-center items-center rounded-full">
+            <span className="text-xl text-white">{loading ? "Login..." : "Login"}</span>
+            {!loading && <div className="size-7 bg-[#8c98ff] flex justify-center items-center rounded-full">
               <FontAwesomeIcon icon={faArrowRight} className="text-white" />
-            </div>
+            </div>}
           </button>
         </form>
       </div>

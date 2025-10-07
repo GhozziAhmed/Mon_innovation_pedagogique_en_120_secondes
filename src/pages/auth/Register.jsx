@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
 // 💡 Import the new standalone component
-import DropdownField from "../components/DropdownField"; 
+import DropdownField from "../../components/DropdownField"; 
 
 const Register = () => {
   const navigate = useNavigate();
@@ -44,6 +44,7 @@ const Register = () => {
     antecedents: "",
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // 💡 Centralized form update handler for dropdowns
   const handleDropdownSelect = useCallback((key, value) => {
@@ -71,15 +72,18 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setLoading(true);
     axios
       .post("https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/register", form)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
         navigate("/");
+        setLoading(false);
       })
       .catch((err) => {
         console.error(err);
+        setLoading(false);
         if (err.response) {
           setError(err.response.data.error || "Une erreur est survenue.");
         } else {
@@ -272,10 +276,11 @@ const Register = () => {
           </div>
           
           <button
-            className="bg-[#004C91] flex items-center gap-5 py-2 px-6 rounded-full mt-4 cursor-pointer"
+            className="bg-[#004C91] flex items-center gap-5 py-2 px-6 rounded-full mt-4 cursor-pointer disabled:opacity-50"
             type="submit"
+            disabled={loading}
           >
-            <span className="text-xl text-white">Register</span>
+            <span className="text-xl text-white">{loading ? "Register..." : "Register"}</span>
             <div className="size-7 bg-[#8c98ff] flex justify-center items-center rounded-full">
               <FontAwesomeIcon icon={faArrowRight} className="text-white" />
             </div>
@@ -283,7 +288,6 @@ const Register = () => {
         </form>
       </div>
       <div className="relative col-span-12 lg:col-span-7 w-full h-screen overflow-hidden hidden lg:block">
-        {/* Background/Visuals remain the same */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-12 bg-white p-5 rounded-lg shadow-xl border border-zinc-200">
           <img src="/logo_transparent.png" alt="" className="w-50" />
         </div>
