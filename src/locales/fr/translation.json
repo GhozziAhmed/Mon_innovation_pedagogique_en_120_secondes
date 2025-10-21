@@ -70,5 +70,27 @@
       "message": "Le concours est encore en phase de '{{phase}}'.",
       "pausedMessage": "Le concours n'a pas encore commencé ou en pause."
     }
+  },
+  "resultats": {
+    "titre": "Résultats Du Concours",
+    "sous_titre": "Découvrez les finalistes de cette édition",
+    "tableau": {
+      "classement": "Classement",
+      "candidat": "Candidat",
+      "pays": "Pays",
+      "score_jury": "Score Jury (Moyenne Finale)",
+      "votes_publics": "Votes Publics",
+      "titre_innovation": "Titre Innovation"
+    },
+    "statut": {
+      "page_invalide": "Page Non Valable",
+      "non_disponible": "Les résultats ne sont pas encore disponibles.",
+      "bientot": "Bientôt Disponible",
+      "phase_en_cours": "Le concours est actuellement en phase d'« {phase} »",
+      "non_commence": "Le concours n'a pas encore commencé ou est en pause."
+    },
+    "erreur": {
+      "recuperation_phase": "Erreur lors de la récupération de la phase"
+    }
   }
 }

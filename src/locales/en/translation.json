@@ -70,5 +70,27 @@
       "message": "The competition is still in the '{{phase}}' phase.",
       "pausedMessage": "The competition has not started or is on pause."
     }
+  },
+  "results": {
+    "title": "Contest Results",
+    "subtitle": "Discover the finalists of this edition",
+    "table": {
+      "rank": "Rank",
+      "candidate": "Candidate",
+      "country": "Country",
+      "jury_score": "Jury Score",
+      "public_votes": "Public Votes",
+      "innovation_title": "Innovation Title"
+    },
+    "status": {
+      "invalid_page": "Page Not Available",
+      "not_available": "Results are not yet available",
+      "coming_soon": "Coming Soon",
+      "phase_ongoing": "The contest is currently in the '{phase}' phase",
+      "not_started": "The contest has not yet started or is paused"
+    },
+    "error": {
+      "fetch_phase": "Error fetching current phase"
+    }
   }
 }

@@ -101,7 +101,7 @@ const JuryLayout = () => {
             >
               Evaluations
             </NavLink>
-            <NavLink
+            {/* <NavLink
               to="/jury/profile"
               className={({ isActive }) =>
                 `flex-1 flex justify-center rounded py-2 px-4 ${
@@ -112,7 +112,7 @@ const JuryLayout = () => {
               }
             >
               Profile
-            </NavLink>
+            </NavLink> */}
           </div>
         </div>
         <Outlet />
