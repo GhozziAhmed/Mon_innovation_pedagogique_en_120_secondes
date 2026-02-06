@@ -10,13 +10,13 @@ const Phase = ({ phase, src, fetchData }) => {
 
   const handleChange = async (status) => {
     try {
-      const res = await axios.get("https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/active");
+      const res = await axios.get("http://localhost:5000/api/editions/active");
       if (!res.data || !res.data.edition_id) {
         throw new Error("No active edition found.");
       }
 
       await axios.put(
-        `https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/${res.data.edition_id}/${phase.id}`,
+        `http://localhost:5000/api/phases/${res.data.edition_id}/${phase.id}`,
         { status },
         {
           headers: {

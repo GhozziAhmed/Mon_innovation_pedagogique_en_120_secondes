@@ -32,7 +32,7 @@ const Participation = () => {
   const checkPhase = async () => {
     try {
       const phaseRes = await axios.get(
-        "https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/current-phase"
+        "http://localhost:5000/api/phases/current-phase"
       );
       const phaseName = phaseRes.data?.phase?.phase_name;
       setCurrentPhase(phaseName);
@@ -63,7 +63,7 @@ const Participation = () => {
       try {
         // 1. Authenticate and check role
         const response = await axios.get(
-          "https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/me",
+          "http://localhost:5000/api/auth/me",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -111,7 +111,7 @@ const Participation = () => {
     setSending(true);
     axios
       .post(
-        "https://mon-innovation-pedagogique-en-120.onrender.com/api/candidatures",
+        "http://localhost:5000/api/candidatures",
         form,
         {
           headers: {

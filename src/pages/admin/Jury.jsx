@@ -25,12 +25,12 @@ const Jury = () => {
   const fetchData = async () => {
     try {
       const [juries_stats, juries_data] = await Promise.all([
-        axios.get("https://mon-innovation-pedagogique-en-120.onrender.com/api/stats/juries-counts", {
+        axios.get("http://localhost:5000/api/stats/juries-counts", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }),
-        axios.get("https://mon-innovation-pedagogique-en-120.onrender.com/api/stats/juries", {
+        axios.get("http://localhost:5000/api/stats/juries", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -52,7 +52,7 @@ const Jury = () => {
     setLoading(true);
     try {
       const res = await axios.patch(
-        `https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/delete/${selectedJury.user_id}`,
+        `http://localhost:5000/api/auth/delete/${selectedJury.user_id}`,
         {},
         {
           headers: {
@@ -86,7 +86,7 @@ const Jury = () => {
     try {
       if (juryModalMode === "add") {
         const res = await axios.post(
-          "https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/create",
+          "http://localhost:5000/api/auth/create",
           { ...form, role: "jury" },
           {
             headers: {
@@ -106,7 +106,7 @@ const Jury = () => {
       }
       if (juryModalMode === "edit") {
         const res = await axios.put(
-          "https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/edit",
+          "http://localhost:5000/api/auth/edit",
           form,
           {
             headers: {
@@ -140,7 +140,7 @@ const Jury = () => {
     try {
       const newStatus = statut === "actif" ? "inactif" : "actif";
       const res = await axios.put(
-        `https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/status/${id}`,
+        `http://localhost:5000/api/auth/status/${id}`,
         { statut: newStatus },
         {
           headers: {

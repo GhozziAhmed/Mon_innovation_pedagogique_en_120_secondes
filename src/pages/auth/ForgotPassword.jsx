@@ -14,7 +14,7 @@ const ForgotPassword = () => {
     setLoading(true);
     axios
       .post(
-        "https://mon-innovation-pedagogique-en-120.onrender.com/api/auth/forgot-password",
+        "http://localhost:5000/api/auth/forgot-password",
         { email }
       )
       .then((res) => {

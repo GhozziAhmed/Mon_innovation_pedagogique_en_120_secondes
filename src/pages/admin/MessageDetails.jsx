@@ -9,7 +9,7 @@ const MessageDetails = () => {
     const navigate = useNavigate();
     const [message, setMessage] = useState({});
     const fetchData = () => {
-        axios.get(`https://mon-innovation-pedagogique-en-120.onrender.com/api/contact/admin/${id}`, {
+        axios.get(`http://localhost:5000/api/contact/admin/${id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }

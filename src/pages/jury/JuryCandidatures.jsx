@@ -23,7 +23,7 @@ const JuryCandidatures = () => {
     const fetchPhase = async () => {
         try {
             const res = await axios.get(
-                "https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/current-phase"
+                "http://localhost:5000/api/phases/current-phase"
             );
             setCurrentPhase(res.data?.phase?.phase_name || "");
         } catch (err) {
@@ -34,7 +34,7 @@ const JuryCandidatures = () => {
 
     const fetchData = async () => {
         try {
-            const res = await axios.get("https://mon-innovation-pedagogique-en-120.onrender.com/api/jury/assignments/me", {
+            const res = await axios.get("http://localhost:5000/api/jury/assignments/me", {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },

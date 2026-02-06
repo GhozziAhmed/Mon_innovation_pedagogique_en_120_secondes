@@ -15,11 +15,11 @@ const Votes = () => {
   const fetchData = async () => {
     try {
       const editionRes = await axios.get(
-        "https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/active"
+        "http://localhost:5000/api/editions/active"
       );
       const edition_id = editionRes.data.edition_id;
       const res = await axios.get(
-        `https://mon-innovation-pedagogique-en-120.onrender.com/api/votes/results/${edition_id}`
+        `http://localhost:5000/api/votes/results/${edition_id}`
       );
       setVotes(res.data);
       setFilteredVotes(res.data);

@@ -10,7 +10,7 @@ const ResultatsAdmin = () => {
   const [results, setResults] = useState([]);
   const fetchData = () => {
     axios
-      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/results_agg")
+      .get("http://localhost:5000/api/results_agg")
       .then((res) => {
         console.log(res);
         setResults(res.data);

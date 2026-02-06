@@ -10,7 +10,7 @@ const News = () => {
   const [news, setNews] = useState([]);
   const fetchData = () => {
     axios
-      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/news")
+      .get("http://localhost:5000/api/news")
       .then((res) => {
         setNews(res.data);
       })
@@ -34,7 +34,7 @@ const News = () => {
     setModalLoading(true);
     if (modalMode === "add") {
       axios
-        .post("https://mon-innovation-pedagogique-en-120.onrender.com/api/news", form, {
+        .post("http://localhost:5000/api/news", form, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -61,7 +61,7 @@ const News = () => {
         });
     } else {
       axios
-        .put(`https://mon-innovation-pedagogique-en-120.onrender.com/api/news/${selectedData.news_id}`, form, {
+        .put(`http://localhost:5000/api/news/${selectedData.news_id}`, form, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -92,7 +92,7 @@ const News = () => {
   const handleDelete = () => {
     setModalLoading(true);
     axios
-      .delete(`https://mon-innovation-pedagogique-en-120.onrender.com/api/news/${articleId}`, {
+      .delete(`http://localhost:5000/api/news/${articleId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

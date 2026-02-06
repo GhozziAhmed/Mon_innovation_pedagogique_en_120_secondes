@@ -43,7 +43,7 @@ const Contact = () => {
       setSubmitting(true);
       
       // Axios call to your backend API
-      const response = await axios.post('https://mon-innovation-pedagogique-en-120.onrender.com/api/contact', {
+      const response = await axios.post('http://localhost:5000/api/contact', {
         sender_name: form.name,
         sender_email: form.email,
         subject: form.subject,

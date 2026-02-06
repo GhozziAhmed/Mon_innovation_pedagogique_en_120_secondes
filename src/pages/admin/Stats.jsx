@@ -5,7 +5,7 @@ const Stats = () => {
   const [stats, setStats] = useState({});
   useEffect(() => {
     axios
-      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/stats", {
+      .get("http://localhost:5000/api/stats", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`, // or sessionStorage
         },

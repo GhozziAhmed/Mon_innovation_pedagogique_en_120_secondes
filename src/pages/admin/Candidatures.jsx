@@ -31,7 +31,7 @@ const Candidatures = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("https://mon-innovation-pedagogique-en-120.onrender.com/api/candidatures");
+      const res = await axios.get("http://localhost:5000/api/candidatures");
       setCandidatures(res.data);
       setFilteredCandidatures(res.data);
     } catch (err) {
@@ -66,7 +66,7 @@ const Candidatures = () => {
     setLoading(true);
     try {
       const res = await axios.patch(
-        `https://mon-innovation-pedagogique-en-120.onrender.com/api/candidatures/${id}/status`,
+        `http://localhost:5000/api/candidatures/${id}/status`,
         { status },
         {
           headers: {
@@ -98,7 +98,7 @@ const Candidatures = () => {
     setDeleteLoading(true);
     try {
       const res = await axios.delete(
-        `https://mon-innovation-pedagogique-en-120.onrender.com/api/candidatures/delete/${CandidatureId}`,
+        `http://localhost:5000/api/candidatures/delete/${CandidatureId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -130,7 +130,7 @@ const Candidatures = () => {
     setAssignLoading(true);
     try {
       const res = await axios.post(
-        "https://mon-innovation-pedagogique-en-120.onrender.com/api/jury/admin/auto/1",
+        "http://localhost:5000/api/jury/admin/auto/1",
         {},
         {
           headers: {

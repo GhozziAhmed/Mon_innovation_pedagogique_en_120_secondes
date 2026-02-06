@@ -20,7 +20,7 @@ const Vote = () => {
   const fetchData = () => {
     setIsLoading(true);
     axios
-      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/candidatures?edition_id=1&statut=preselectionnee")
+      .get("http://localhost:5000/api/candidatures?edition_id=1&statut=preselectionnee")
       .then((res) => {
         setCandidatures(res.data);
         setFilteredCandidatures(res.data);
@@ -35,7 +35,7 @@ const Vote = () => {
   useEffect(() => {
     fetchData();
     axios
-      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/current-phase")
+      .get("http://localhost:5000/api/phases/current-phase")
       .then((res) => {
         setPhase(res.data.phase.phase_name);
       })

@@ -20,7 +20,7 @@ const Evaluation = () => {
   });
   const fetchData = () => {
     axios
-      .get(`https://mon-innovation-pedagogique-en-120.onrender.com/api/candidatures/${id}`)
+      .get(`http://localhost:5000/api/candidatures/${id}`)
       .then((res) => {
         console.log(res.data);
         setCandidature(res.data);
@@ -29,7 +29,7 @@ const Evaluation = () => {
         console.log(err);
       });
     axios
-      .get(`https://mon-innovation-pedagogique-en-120.onrender.com/api/jury/evaluation/${id}`, {
+      .get(`http://localhost:5000/api/jury/evaluation/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -52,7 +52,7 @@ const Evaluation = () => {
     e.preventDefault();
     setLoading(true);
     axios
-      .post(`https://mon-innovation-pedagogique-en-120.onrender.com/api/jury/${id}`, form, {
+      .post(`http://localhost:5000/api/jury/${id}`, form, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

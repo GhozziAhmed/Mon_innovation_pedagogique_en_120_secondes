@@ -22,13 +22,13 @@ const Phases = () => {
     setLoadingInitial(true); // Start loading
     try {
       const activeEditionRes = await axios.get(
-        "https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/active"
+        "http://localhost:5000/api/editions/active"
       );
       
       // Check if an active edition was found
       if (activeEditionRes.data && activeEditionRes.data.edition_id) {
         const phasesRes = await axios.get(
-          `https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/${activeEditionRes.data.edition_id}`,
+          `http://localhost:5000/api/phases/${activeEditionRes.data.edition_id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -56,7 +56,7 @@ const Phases = () => {
   const reset = () => {
     axios
       .put(
-        "https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/reset",
+        "http://localhost:5000/api/phases/reset",
         {},
         {
           headers: {

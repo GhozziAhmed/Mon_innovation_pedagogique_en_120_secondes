@@ -25,7 +25,7 @@ const Editions = () => {
   const fetchEditions = async () => {
     try {
       const res = await axios.get(
-        "https://mon-innovation-pedagogique-en-120.onrender.com/api/editions"
+        "http://localhost:5000/api/editions"
       );
       setEditions(res.data);
     } catch (err) {
@@ -52,7 +52,7 @@ const Editions = () => {
     try {
       if (modalMode === "add") {
         await axios.post(
-          "https://mon-innovation-pedagogique-en-120.onrender.com/api/editions",
+          "http://localhost:5000/api/editions",
           form,
           {
             headers: {
@@ -68,7 +68,7 @@ const Editions = () => {
         });
       } else {
         await axios.put(
-          "https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/edit",
+          "http://localhost:5000/api/editions/edit",
           form,
           {
             headers: {
@@ -102,7 +102,7 @@ const Editions = () => {
     setLoading(true);
     try {
       const res = await axios.delete(
-        `https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/delete/${id}`,
+        `http://localhost:5000/api/editions/delete/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -134,7 +134,7 @@ const Editions = () => {
     setLoading(true);
     try {
       const res = await axios.put(
-        `https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/${id}/archive`,
+        `http://localhost:5000/api/editions/${id}/archive`,
         {},
         {
           headers: {
@@ -166,7 +166,7 @@ const Editions = () => {
   const reset = () => {
     axios
       .put(
-        "https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/reset",
+        "http://localhost:5000/api/phases/reset",
         {},
         {
           headers: {
@@ -191,7 +191,7 @@ const Editions = () => {
 
   const updatePhasesEdition = (id) => {
     axios.put(
-      `https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/${id}`,
+      `http://localhost:5000/api/phases/${id}`,
       {},
       {
         headers: {
@@ -208,7 +208,7 @@ const Editions = () => {
   const handleActive = async (id) => {
     try {
       const res = await axios.put(
-        `https://mon-innovation-pedagogique-en-120.onrender.com/api/editions/${id}/activate`,
+        `http://localhost:5000/api/editions/${id}/activate`,
         {},
         {
           headers: {

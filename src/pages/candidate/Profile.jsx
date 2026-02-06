@@ -15,12 +15,12 @@ const Profile = () => {
     const fetchCandidature = async () => {
       try {
         const [candidatureRes, evaluationsRes] = await Promise.all([
-          axios.get(`https://mon-innovation-pedagogique-en-120.onrender.com/api/candidatures/me`, {
+          axios.get(`http://localhost:5000/api/candidatures/me`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }),
-          axios.get(`https://mon-innovation-pedagogique-en-120.onrender.com/api/jury/candidate/me`, {
+          axios.get(`http://localhost:5000/api/jury/candidate/me`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },

@@ -12,7 +12,7 @@ const Partners = () => {
   const [partners, setPartners] = useState([]);
   useEffect(() => {
     axios
-      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/partners/")
+      .get("http://localhost:5000/api/partners/")
       .then((res) => {
         setPartners(res.data);
         console.log(res);

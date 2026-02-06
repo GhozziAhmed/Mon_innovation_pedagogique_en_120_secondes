@@ -5,7 +5,7 @@ const JuryStats = () => {
   const [stats, setStats] = useState({});
   const fetchData = () => {
     axios
-      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/stats/assignment-stats", {
+      .get("http://localhost:5000/api/stats/assignment-stats", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

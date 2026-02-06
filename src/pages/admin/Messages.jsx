@@ -13,7 +13,7 @@ const Messages = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("https://mon-innovation-pedagogique-en-120.onrender.com/api/contact/admin", {
+      const res = await axios.get("http://localhost:5000/api/contact/admin", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -27,7 +27,7 @@ const Messages = () => {
   const updateStatus = async (id, status) => {
     try {
       await axios.patch(
-        `https://mon-innovation-pedagogique-en-120.onrender.com/api/contact/admin/${id}`,
+        `http://localhost:5000/api/contact/admin/${id}`,
         { status },
         {
           headers: {
@@ -46,7 +46,7 @@ const Messages = () => {
     setLoading(true);
     try {
       const res = await axios.delete(
-        `https://mon-innovation-pedagogique-en-120.onrender.com/api/contact/admin/${selectedMessage}`,
+        `http://localhost:5000/api/contact/admin/${selectedMessage}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

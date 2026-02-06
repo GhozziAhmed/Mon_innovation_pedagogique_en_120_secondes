@@ -14,7 +14,7 @@ const Resultats = () => {
   // 1. Fetch current phase
   useEffect(() => {
     axios
-      .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/phases/current-phase")
+      .get("http://localhost:5000/api/phases/current-phase")
       .then((res) => {
         setPhase(res.data?.phase?.phase_name || "");
       })
@@ -39,7 +39,7 @@ const Resultats = () => {
     if (phase === "Selection finale") {
       setLoading(true);
       axios
-        .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/results_agg")
+        .get("http://localhost:5000/api/results_agg")
         .then((res) => {
           setResults(res.data);
         })

@@ -15,7 +15,7 @@ const News = () => {
     // Add a small delay to better showcase the skeleton loader
     setTimeout(() => {
       axios
-        .get("https://mon-innovation-pedagogique-en-120.onrender.com/api/news")
+        .get("http://localhost:5000/api/news")
         .then((res) => {
           setNews(res.data.slice(0, 3));
         })
